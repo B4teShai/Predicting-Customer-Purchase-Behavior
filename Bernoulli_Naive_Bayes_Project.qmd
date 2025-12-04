@@ -246,23 +246,29 @@ print(f"Pandas хувилбар: {pd.__version__}")
 
 ```{python}
 # ============================================
-# Өгөгдлийг ачаалах
-# Loading the Groceries dataset
+# Өгөгдлийг ачаалах ба цэвэрлэх
 # ============================================
-
-# Өгөгдлийг унших (мөр бүр нь нэг гүйлгээ, таслалаар тусгаарлагдсан бүтээгдэхүүнүүд)
 transactions = []
-with open('groceries.csv', 'r', encoding='utf-8') as f:
-    for line in f:
-        # Мөр бүрийг таслалаар задлаж, хоосон утгуудыг арилгах
-        items = [item.strip() for item in line.strip().split(',') if item.strip()]
-        if items:  # Хоосон мөрүүдийг алгасах
-            transactions.append(items)
 
-print(f"Нийт гүйлгээний тоо: {len(transactions):,}")
-print(f"\nЭхний 5 гүйлгээ:")
-for i, trans in enumerate(transactions[:5], 1):
-    print(f"  {i}. {trans}")
+with open('groceries.csv', 'r', encoding='utf-8') as f:
+    lines = f.readlines()
+
+lines = lines[1:] # Эхний мөр нь 'Item(s)' устгана
+
+for line in lines:
+    parts = [x.strip() for x in line.strip().split(',') if x.strip()]
+    
+    if len(parts) <= 1: # Хоосон мөрүүдийг алгасах
+        continue
+    
+    cleaned_items = parts[1:]
+    if cleaned_items:
+        transactions.append(cleaned_items)
+
+print("Худалдан авалтын тоо:", len(transactions))
+print("\nЭхний 5 худалдан авалт:")
+for i, t in enumerate(transactions[:5], 1):
+    print(f"{i}. {t}")
 ```
 
 ### 3.3 Өгөгдлийн анхны шинжилгээ

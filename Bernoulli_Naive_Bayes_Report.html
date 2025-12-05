@@ -1,0 +1,1550 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.8.26">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Б.Билгүүнтөгөлдөр (20B1NUM1087)">
+<meta name="author" content="О.Энхбаяр (21B1NUM0940)">
+<meta name="author" content="Э.Алтаншагай (22B1NUM0331)">
+<meta name="author" content="Б.Намуундарь (23B1NUM0543)">
+<meta name="author" content="Ч.Саранцацралт (24B1NUM0019)">
+
+<title>Бернуллийн Наив Байесын загварын хэрэглээ: Хэрэглэгчийн худалдан авах төлөвийг урьдчилан таамаглах нь</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
+
+
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" integrity="sha384-ZvpUoO/+PpLXR1lu4jmpXWu80pZlYUAfxl5NsBMWOEPSjUn/6Z/hRTt8+pR6L4N2" crossorigin="anonymous"></script><script src="Bernoulli_Naive_Bayes_Report_files/libs/clipboard/clipboard.min.js"></script>
+<script src="Bernoulli_Naive_Bayes_Report_files/libs/quarto-html/quarto.js" type="module"></script>
+<script src="Bernoulli_Naive_Bayes_Report_files/libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="Bernoulli_Naive_Bayes_Report_files/libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="Bernoulli_Naive_Bayes_Report_files/libs/quarto-html/popper.min.js"></script>
+<script src="Bernoulli_Naive_Bayes_Report_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="Bernoulli_Naive_Bayes_Report_files/libs/quarto-html/anchor.min.js"></script>
+<link href="Bernoulli_Naive_Bayes_Report_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="Bernoulli_Naive_Bayes_Report_files/libs/quarto-html/quarto-syntax-highlighting-587c61ba64f3a5504c4d52d930310e48.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="Bernoulli_Naive_Bayes_Report_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="Bernoulli_Naive_Bayes_Report_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="Bernoulli_Naive_Bayes_Report_files/libs/bootstrap/bootstrap-d6a003b94517c951b2d65075d42fb01b.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="https://cdn.jsdelivr.net/npm/requirejs@2.3.6/require.min.js" integrity="sha384-c9c+LnTbwQ3aujuU7ULEPVvgLs+Fn6fJUvIGTsuu1ZcCf11fiEubah0ttpca4ntM sha384-6V1/AdqZRWk1KAlWbKBlGhN7VG4iE/yAZcO6NZPMF8od0vukrvr0tg4qY6NSrItx" crossorigin="anonymous"></script>
+
+<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="quarto-light">
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+<div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+  <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Агуулга</h2>
+   
+  <ul>
+  <li><a href="#шаардлагатай-багцууд" id="toc-шаардлагатай-багцууд" class="nav-link active" data-scroll-target="#шаардлагатай-багцууд">Шаардлагатай багцууд</a></li>
+  <li><a href="#удиртгал" id="toc-удиртгал" class="nav-link" data-scroll-target="#удиртгал"><span class="header-section-number">1</span> Удиртгал</a>
+  <ul class="collapse">
+  <li><a href="#судалгааны-хэрэгцээ-шаардлага" id="toc-судалгааны-хэрэгцээ-шаардлага" class="nav-link" data-scroll-target="#судалгааны-хэрэгцээ-шаардлага"><span class="header-section-number">1.1</span> Судалгааны хэрэгцээ, шаардлага</a></li>
+  <li><a href="#зорилго" id="toc-зорилго" class="nav-link" data-scroll-target="#зорилго"><span class="header-section-number">1.2</span> Зорилго</a></li>
+  <li><a href="#өгөгдлийн-эх-сурвалж" id="toc-өгөгдлийн-эх-сурвалж" class="nav-link" data-scroll-target="#өгөгдлийн-эх-сурвалж"><span class="header-section-number">1.3</span> Өгөгдлийн эх сурвалж</a></li>
+  </ul></li>
+  <li><a href="#онолын-үндэслэл" id="toc-онолын-үндэслэл" class="nav-link" data-scroll-target="#онолын-үндэслэл"><span class="header-section-number">2</span> Онолын үндэслэл</a>
+  <ul class="collapse">
+  <li><a href="#байесын-теорем" id="toc-байесын-теорем" class="nav-link" data-scroll-target="#байесын-теорем"><span class="header-section-number">2.1</span> Байесын теорем</a></li>
+  <li><a href="#наив-байесын-нөхцөлт-үл-хамаарлын-таамаглал" id="toc-наив-байесын-нөхцөлт-үл-хамаарлын-таамаглал" class="nav-link" data-scroll-target="#наив-байесын-нөхцөлт-үл-хамаарлын-таамаглал"><span class="header-section-number">2.2</span> Наив Байесын нөхцөлт үл хамаарлын таамаглал</a></li>
+  <li><a href="#бернуллийн-наив-байес-загвар" id="toc-бернуллийн-наив-байес-загвар" class="nav-link" data-scroll-target="#бернуллийн-наив-байес-загвар"><span class="header-section-number">2.3</span> Бернуллийн Наив Байес загвар</a></li>
+  <li><a href="#лапласын-тэгшитгэл" id="toc-лапласын-тэгшитгэл" class="nav-link" data-scroll-target="#лапласын-тэгшитгэл"><span class="header-section-number">2.4</span> Лапласын тэгшитгэл</a></li>
+  <li><a href="#лог-магадлалын-хувиргалт" id="toc-лог-магадлалын-хувиргалт" class="nav-link" data-scroll-target="#лог-магадлалын-хувиргалт"><span class="header-section-number">2.5</span> Лог магадлалын хувиргалт</a></li>
+  </ul></li>
+  <li><a href="#өгөгдлийн-боловсруулалт" id="toc-өгөгдлийн-боловсруулалт" class="nav-link" data-scroll-target="#өгөгдлийн-боловсруулалт"><span class="header-section-number">3</span> Өгөгдлийн боловсруулалт</a>
+  <ul class="collapse">
+  <li><a href="#шаардлагатай-сангуудыг-ачаалах" id="toc-шаардлагатай-сангуудыг-ачаалах" class="nav-link" data-scroll-target="#шаардлагатай-сангуудыг-ачаалах"><span class="header-section-number">3.1</span> Шаардлагатай сангуудыг ачаалах</a></li>
+  <li><a href="#өгөгдлийг-ачаалах" id="toc-өгөгдлийг-ачаалах" class="nav-link" data-scroll-target="#өгөгдлийг-ачаалах"><span class="header-section-number">3.2</span> Өгөгдлийг ачаалах</a></li>
+  <li><a href="#өгөгдлийн-анхны-шинжилгээ" id="toc-өгөгдлийн-анхны-шинжилгээ" class="nav-link" data-scroll-target="#өгөгдлийн-анхны-шинжилгээ"><span class="header-section-number">3.3</span> Өгөгдлийн анхны шинжилгээ</a></li>
+  <li><a href="#хоёртын-матриц-үүсгэх" id="toc-хоёртын-матриц-үүсгэх" class="nav-link" data-scroll-target="#хоёртын-матриц-үүсгэх"><span class="header-section-number">3.4</span> Хоёртын матриц үүсгэх</a></li>
+  <li><a href="#өгөгдлийг-хуваах" id="toc-өгөгдлийг-хуваах" class="nav-link" data-scroll-target="#өгөгдлийг-хуваах"><span class="header-section-number">3.5</span> Өгөгдлийг хуваах</a></li>
+  </ul></li>
+  <li><a href="#бернуллийн-наив-байес-загварыг-бүтээх" id="toc-бернуллийн-наив-байес-загварыг-бүтээх" class="nav-link" data-scroll-target="#бернуллийн-наив-байес-загварыг-бүтээх"><span class="header-section-number">4</span> Бернуллийн Наив Байес загварыг бүтээх</a>
+  <ul class="collapse">
+  <li><a href="#загварын-класс" id="toc-загварын-класс" class="nav-link" data-scroll-target="#загварын-класс"><span class="header-section-number">4.1</span> Загварын класс</a></li>
+  <li><a href="#загварыг-сургах" id="toc-загварыг-сургах" class="nav-link" data-scroll-target="#загварыг-сургах"><span class="header-section-number">4.2</span> Загварыг сургах</a></li>
+  </ul></li>
+  <li><a href="#загварын-үнэлгээ" id="toc-загварын-үнэлгээ" class="nav-link" data-scroll-target="#загварын-үнэлгээ"><span class="header-section-number">5</span> Загварын үнэлгээ</a>
+  <ul class="collapse">
+  <li><a href="#үнэлгээний-хэмжигдэхүүнүүд" id="toc-үнэлгээний-хэмжигдэхүүнүүд" class="nav-link" data-scroll-target="#үнэлгээний-хэмжигдэхүүнүүд"><span class="header-section-number">5.1</span> Үнэлгээний хэмжигдэхүүнүүд</a></li>
+  <li><a href="#таамаглал-ба-үнэлгээ" id="toc-таамаглал-ба-үнэлгээ" class="nav-link" data-scroll-target="#таамаглал-ба-үнэлгээ"><span class="header-section-number">5.2</span> Таамаглал ба үнэлгээ</a></li>
+  <li><a href="#roc-муруй-ба-auc" id="toc-roc-муруй-ба-auc" class="nav-link" data-scroll-target="#roc-муруй-ба-auc"><span class="header-section-number">5.3</span> ROC муруй ба AUC</a></li>
+  <li><a href="#кросс-валидаци" id="toc-кросс-валидаци" class="nav-link" data-scroll-target="#кросс-валидаци"><span class="header-section-number">5.4</span> Кросс-валидаци</a></li>
+  <li><a href="#шинж-чанаруудын-ач-холбогдол" id="toc-шинж-чанаруудын-ач-холбогдол" class="nav-link" data-scroll-target="#шинж-чанаруудын-ач-холбогдол"><span class="header-section-number">5.5</span> Шинж чанаруудын ач холбогдол</a></li>
+  </ul></li>
+  <li><a href="#sklearn-тэй-харьцуулалт" id="toc-sklearn-тэй-харьцуулалт" class="nav-link" data-scroll-target="#sklearn-тэй-харьцуулалт"><span class="header-section-number">6</span> Sklearn-тэй харьцуулалт</a></li>
+  <li><a href="#дүгнэлт" id="toc-дүгнэлт" class="nav-link" data-scroll-target="#дүгнэлт">Дүгнэлт</a></li>
+  <li><a href="#багийн-гишүүдийн-үүрэг-оролцоо" id="toc-багийн-гишүүдийн-үүрэг-оролцоо" class="nav-link" data-scroll-target="#багийн-гишүүдийн-үүрэг-оролцоо">Багийн гишүүдийн үүрэг оролцоо</a></li>
+  <li><a href="#ашигласан-материал" id="toc-ашигласан-материал" class="nav-link" data-scroll-target="#ашигласан-материал">Ашигласан материал</a></li>
+  </ul>
+<div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="Bernoulli_Naive_Bayes_Report.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li></ul></div></nav>
+</div>
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Бернуллийн Наив Байесын загварын хэрэглээ: Хэрэглэгчийн худалдан авах төлөвийг урьдчилан таамаглах нь</h1>
+<p class="subtitle lead">Төслийн ажил - Машин сургалт</p>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Authors</div>
+    <div class="quarto-title-meta-contents">
+             <p>Б.Билгүүнтөгөлдөр (20B1NUM1087) </p>
+             <p>О.Энхбаяр (21B1NUM0940) </p>
+             <p>Э.Алтаншагай (22B1NUM0331) </p>
+             <p>Б.Намуундарь (23B1NUM0543) </p>
+             <p>Ч.Саранцацралт (24B1NUM0019) </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">2025 оны 12-р сарын 5</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+<div>
+  <div class="abstract">
+    <div class="block-title">Abstract</div>
+    Энэхүү төслийн ажлаар Kaggle платформоос авсан Groceries өгөгдлийн санг ашиглан хэрэглэгчдийн худалдан авалтын төлөвийг урьдчилан таамаглах Бернуллийн Наив Байес (Bernoulli Naive Bayes) ангиллын загварыг математик үндэслэлтэйгээр бүтээв. Судалгаанд 9,835 худалдан авалтын түүх, 169 өвөрмөц бүтээгдэхүүн агуулсан өгөгдлийг боловсруулж, “whole milk” (сүү) худалдан авах эсэхийг таамаглах загвар бүтээв. Загварыг 5-фолд кросс-валидациар үнэлэхэд дундаж нарийвчлал 74.2% байв.
+  </div>
+</div>
+
+
+</header>
+
+
+<section id="шаардлагатай-багцууд" class="level1 unnumbered">
+<h1 class="unnumbered">Шаардлагатай багцууд</h1>
+<p>Шаардлагатай багцуудыг дараах байдлаар урьдчилан суулгана.</p>
+<p><code>pip install numpy pandas matplotlib seaborn scikit-learn</code></p>
+</section>
+<section id="удиртгал" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> Удиртгал</h1>
+<section id="судалгааны-хэрэгцээ-шаардлага" class="level2" data-number="1.1">
+<h2 data-number="1.1" class="anchored" data-anchor-id="судалгааны-хэрэгцээ-шаардлага"><span class="header-section-number">1.1</span> Судалгааны хэрэгцээ, шаардлага</h2>
+<p>Орчин үеийн жижиглэн худалдааны салбарт хэрэглэгчдийн худалдан авах зан төлөвийг урьдчилан таамаглах нь маркетингийн стратеги, бараа материалын менежмент, хувийн санал болгох систем зэрэгт чухал ач холбогдолтой <span class="citation" data-cites="leskovec2014mining">Leskovec et al. (<a href="#ref-leskovec2014mining" role="doc-biblioref">2014</a>)</span>. Машин сургалтын аргуудыг ашиглан хэрэглэгчдийн өмнөх худалдан авалтын түүх дээр үндэслэн ирээдүйн худалдан авалтыг таамаглах боломжтой.</p>
+<p>Байесын зарчимд суурилсан ангиллын алгоритмууд нь статистикийн хүчтэй үндэслэлтэй, тайлбарлагдах боломжтой, бага өгөгдөлтэй ч сайн ажилладаг зэрэг давуу талтай <span class="citation" data-cites="murphy2012machine">Murphy (<a href="#ref-murphy2012machine" role="doc-biblioref">2012</a>)</span>. Бернуллийн Наив Байес нь ялангуяа хоёртын (binary) шинж чанаруудтай өгөгдөлд тохиромжтой бөгөөд текст ангилал, худалдан авалтын дүн шинжилгээнд өргөн хэрэглэгддэг.</p>
+</section>
+<section id="зорилго" class="level2" data-number="1.2">
+<h2 data-number="1.2" class="anchored" data-anchor-id="зорилго"><span class="header-section-number">1.2</span> Зорилго</h2>
+<p>Энэхүү төслийн зорилго нь:</p>
+<ol type="1">
+<li>Бернуллийн Наив Байесын алгоритмыг математик үндэслэлтэйгээр ойлгох, батлах</li>
+<li>Тус алгоритмыг Python хэлээр эхнээс нь бүтээх</li>
+<li>Groceries өгөгдлийн сан дээр загварыг сургаж, үнэлгээ хийх</li>
+<li>Хэрэглэгчийн худалдан авах магадлалыг нөхцөлт магадлалын аргаар тооцоолох</li>
+<li>Sklearn сангийн загвартай харьцуулж, баталгаажуулах</li>
+</ol>
+</section>
+<section id="өгөгдлийн-эх-сурвалж" class="level2" data-number="1.3">
+<h2 data-number="1.3" class="anchored" data-anchor-id="өгөгдлийн-эх-сурвалж"><span class="header-section-number">1.3</span> Өгөгдлийн эх сурвалж</h2>
+<p>Судалгаанд Kaggle платформ дээрх “Groceries” өгөгдлийн санг ашиглав <span class="citation" data-cites="hahsler2006arules">Hahsler et al. (<a href="#ref-hahsler2006arules" role="doc-biblioref">2006</a>)</span>. Тус өгөгдөл нь хүнсний дэлгүүрийн 9,835 худалдан авалтын түүхийг агуулсан бөгөөд худалдан авсан бүтээгдэхүүнүүдийн жагсаалт байна. Өгөгдлийг <a href="https://www.kaggle.com/datasets/irfanasrullah/groceries" class="uri">https://www.kaggle.com/datasets/irfanasrullah/groceries</a> хаягаас татаж авав.</p>
+</section>
+</section>
+<section id="онолын-үндэслэл" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> Онолын үндэслэл</h1>
+<section id="байесын-теорем" class="level2" data-number="2.1">
+<h2 data-number="2.1" class="anchored" data-anchor-id="байесын-теорем"><span class="header-section-number">2.1</span> Байесын теорем</h2>
+<p><strong>Тодорхойлолт 2.1 (Нөхцөлт магадлал):</strong> <span class="math inline">\(A\)</span> ба <span class="math inline">\(B\)</span> үзэгдлүүдийн хувьд <span class="math inline">\(B\)</span> өгөгдсөн үеийн <span class="math inline">\(A\)</span>-ийн нөхцөлт магадлалыг дараах байдлаар тодорхойлно <span class="citation" data-cites="murphy2012machine">Murphy (<a href="#ref-murphy2012machine" role="doc-biblioref">2012</a>)</span>:</p>
+<p><span id="eq-conditional"><span class="math display">\[P(A|B) = \frac{P(A \cap B)}{P(B)}, \quad P(B) &gt; 0 \tag{1}\]</span></span></p>
+<p><strong>Теорем 2.1 (Байесын теорем):</strong> <span class="math inline">\(A\)</span> ба <span class="math inline">\(B\)</span> үзэгдлүүдийн хувьд дараах тэнцэтгэл биелнэ:</p>
+<p><span id="eq-bayes"><span class="math display">\[P(A|B) = \frac{P(B|A) \cdot P(A)}{P(B)} \tag{2}\]</span></span></p>
+<p><strong>Баталгаа:</strong> Нөхцөлт магадлалын тодорхойлолтоос:</p>
+<p><span class="math display">\[P(A|B) = \frac{P(A \cap B)}{P(B)} \quad \text{ба} \quad P(B|A) = \frac{P(A \cap B)}{P(A)}\]</span></p>
+<p>Хоёр дахь тэнцэтгэлээс <span class="math inline">\(P(A \cap B) = P(B|A) \cdot P(A)\)</span> гэж бичвэл:</p>
+<p><span class="math display">\[P(A|B) = \frac{P(B|A) \cdot P(A)}{P(B)} \quad \blacksquare\]</span></p>
+<p>Байесын теоремын бүрэлдэхүүн хэсгүүд:</p>
+<ul>
+<li><span class="math inline">\(P(A|B)\)</span> — <strong>Постериор магадлал</strong> (posterior probability): <span class="math inline">\(B\)</span> нотолгоо өгөгдсөн үед <span class="math inline">\(A\)</span>-ийн магадлал</li>
+<li><span class="math inline">\(P(B|A)\)</span> — <strong>Үнэний хувь</strong> (likelihood): <span class="math inline">\(A\)</span> таамаглал үнэн үед <span class="math inline">\(B\)</span> нотолгоо ажиглагдах магадлал</li>
+<li><span class="math inline">\(P(A)\)</span> — <strong>Приор магадлал</strong> (prior probability): Нотолгооноос өмнөх <span class="math inline">\(A\)</span>-ийн магадлал</li>
+<li><span class="math inline">\(P(B)\)</span> — <strong>Нотолгооны магадлал</strong> (evidence): Нормчлолын тогтмол</li>
+</ul>
+</section>
+<section id="наив-байесын-нөхцөлт-үл-хамаарлын-таамаглал" class="level2" data-number="2.2">
+<h2 data-number="2.2" class="anchored" data-anchor-id="наив-байесын-нөхцөлт-үл-хамаарлын-таамаглал"><span class="header-section-number">2.2</span> Наив Байесын нөхцөлт үл хамаарлын таамаглал</h2>
+<p><strong>Асуудал:</strong> <span class="math inline">\(P(\mathbf{X}|C) = P(X_1, X_2, ..., X_n|C)\)</span> хамтын нөхцөлт тархалтыг шууд үнэлэх бэрхшээлтэй. Хэрэв <span class="math inline">\(X_i \in \{0,1\}\)</span> бол <span class="math inline">\(2^n\)</span> параметр үнэлэх шаардлагатай.</p>
+<p><strong>Тодорхойлолт 2.2 (Нөхцөлт үл хамаарал):</strong> <span class="math inline">\(X_1, ..., X_n\)</span> санамсаргүй хувьсагчид <span class="math inline">\(C\)</span> өгөгдсөн үед нөхцөлт хамааралгүй гэж нэрлэгдэнэ, хэрэв:</p>
+<p><span id="eq-independence"><span class="math display">\[P(X_1, ..., X_n | C) = \prod_{i=1}^{n} P(X_i | C) \tag{3}\]</span></span></p>
+<p><strong>Тэмдэглэгээ:</strong> <span class="math inline">\(X_i \perp X_j | C, \quad \forall i \neq j\)</span></p>
+<p><strong>Математик утга:</strong> Энэ таамаглал нь <span class="math inline">\(n\)</span> шинж чанарын хамтын тархалтыг <span class="math inline">\(n\)</span> ширхэг нэг хэмжээст тархалт руу задлах боломжийг олгодог. Үүнээр үнэлэх параметрүүдийн тоог <span class="math inline">\(O(2^n)\)</span>-ээс <span class="math inline">\(O(n)\)</span> болгон бууруулдаг.</p>
+<p><strong>Лемм 2.1:</strong> Наив таамаглал ёсоор магадлалын гинжин дүрэм хялбарчлагдана:</p>
+<p><span class="math display">\[P(X_1, ..., X_n | C) = P(X_1|C) \cdot P(X_2|X_1, C) \cdot ... \cdot P(X_n|X_1,...,X_{n-1}, C)\]</span></p>
+<p>Наив таамаглал: <span class="math inline">\(P(X_i | X_j, C) = P(X_i | C)\)</span> тул:</p>
+<p><span class="math display">\[P(X_1, ..., X_n | C) = \prod_{i=1}^{n} P(X_i | C) \quad \blacksquare\]</span></p>
+</section>
+<section id="бернуллийн-наив-байес-загвар" class="level2" data-number="2.3">
+<h2 data-number="2.3" class="anchored" data-anchor-id="бернуллийн-наив-байес-загвар"><span class="header-section-number">2.3</span> Бернуллийн Наив Байес загвар</h2>
+<p><strong>Тодорхойлолт 2.3 (Бернуллийн тархалт):</strong> <span class="math inline">\(X \in \{0, 1\}\)</span> санамсаргүй хувьсагч нь <span class="math inline">\(\theta\)</span> параметртэй Бернуллийн тархалттай гэж нэрлэгдэнэ, хэрэв:</p>
+<p><span id="eq-bernoulli"><span class="math display">\[P(X = x) = \theta^x (1-\theta)^{1-x}, \quad x \in \{0, 1\} \tag{4}\]</span></span></p>
+<p>Үүнд <span class="math inline">\(\theta = P(X=1)\)</span> нь амжилтын магадлал.</p>
+<p><strong>Шалгалт:</strong></p>
+<ul>
+<li><span class="math inline">\(x=1\)</span> үед: <span class="math inline">\(P(X=1) = \theta^1 (1-\theta)^0 = \theta\)</span> ✓</li>
+<li><span class="math inline">\(x=0\)</span> үед: <span class="math inline">\(P(X=0) = \theta^0 (1-\theta)^1 = 1-\theta\)</span> ✓</li>
+<li>Нийлбэр: <span class="math inline">\(\theta + (1-\theta) = 1\)</span> ✓</li>
+</ul>
+<p><strong>Теорем 2.2 (Бернуллийн Наив Байес ангилагч):</strong> <span class="math inline">\(\mathbf{X} = (X_1, ..., X_n) \in \{0,1\}^n\)</span> хоёртын шинж чанарууд, <span class="math inline">\(C \in \{0, 1\}\)</span> хоёртын анги өгөгдсөн үед Бернуллийн Наив Байес ангилагчийн таамаглал:</p>
+<p><span id="eq-bnb-classifier"><span class="math display">\[\hat{C} = \arg\max_{c \in \{0,1\}} \left[ P(C=c) \prod_{i=1}^{n} P(X_i=1|C=c)^{X_i} \cdot (1-P(X_i=1|C=c))^{1-X_i} \right] \tag{5}\]</span></span></p>
+<p><strong>Баталгаа:</strong> Байесын теорем + Наив таамаглал + Бернуллийн тархалт:</p>
+<p><span class="math display">\[P(C|\mathbf{X}) \propto P(C) \prod_{i=1}^{n} P(X_i|C)\]</span></p>
+<p><span class="math inline">\(X_i | C \sim \text{Bernoulli}(\theta_{ic})\)</span> үед:</p>
+<p><span class="math display">\[P(X_i|C) = \theta_{ic}^{X_i} (1-\theta_{ic})^{1-X_i}\]</span></p>
+<p>Орлуулбал:</p>
+<p><span class="math display">\[P(C|\mathbf{X}) \propto P(C) \prod_{i=1}^{n} \theta_{ic}^{X_i} (1-\theta_{ic})^{1-X_i} \quad \blacksquare\]</span></p>
+</section>
+<section id="лапласын-тэгшитгэл" class="level2" data-number="2.4">
+<h2 data-number="2.4" class="anchored" data-anchor-id="лапласын-тэгшитгэл"><span class="header-section-number">2.4</span> Лапласын тэгшитгэл</h2>
+<p><strong>Асуудал:</strong> Maximum Likelihood үнэлгээ (MLE):</p>
+<p><span id="eq-mle"><span class="math display">\[\hat{\theta}_{ic}^{MLE} = \frac{N_{ic}}{N_c} \tag{6}\]</span></span></p>
+<p>Үүнд <span class="math inline">\(N_{ic}\)</span> нь <span class="math inline">\(C=c\)</span> ангид <span class="math inline">\(X_i=1\)</span> байсан тоо, <span class="math inline">\(N_c\)</span> нь <span class="math inline">\(C=c\)</span> ангийн нийт тоо.</p>
+<p>Хэрэв <span class="math inline">\(N_{ic} = 0\)</span> бол <span class="math inline">\(\hat{\theta}_{ic} = 0\)</span> болж, бүтээгдэхүүний магадлал тэг болно. Энэ нь бусад бүх шинж чанаруудын мэдээллийг устгана (тэг үржүүлбэл тэг).</p>
+<p><strong>Шийдэл (Байесын үнэлгээ):</strong> Beta prior тархалт ашиглана:</p>
+<p><span class="math display">\[\theta_{ic} \sim \text{Beta}(\alpha, \alpha)\]</span></p>
+<p>Posterior дундаж (MAP үнэлгээ):</p>
+<p><span id="eq-laplace"><span class="math display">\[\hat{\theta}_{ic}^{MAP} = \frac{N_{ic} + \alpha}{N_c + 2\alpha} \tag{7}\]</span></span></p>
+<p><strong>Тайлбар:</strong></p>
+<ul>
+<li><span class="math inline">\(\alpha\)</span> — smoothing параметр (pseudo-count)</li>
+<li>Тоологч: <span class="math inline">\(N_{ic} + \alpha\)</span> (бодит + хуурамч <span class="math inline">\(X_i=1\)</span> ажиглалт)</li>
+<li>Хуваагч: <span class="math inline">\(N_c + 2\alpha\)</span> (нийт + хуурамч <span class="math inline">\(X_i=1\)</span> + хуурамч <span class="math inline">\(X_i=0\)</span>)</li>
+</ul>
+</section>
+<section id="лог-магадлалын-хувиргалт" class="level2" data-number="2.5">
+<h2 data-number="2.5" class="anchored" data-anchor-id="лог-магадлалын-хувиргалт"><span class="header-section-number">2.5</span> Лог магадлалын хувиргалт</h2>
+<p><strong>Асуудал (Numerical underflow):</strong> <span class="math inline">\(n\)</span> шинж чанартай үед магадлалуудын үржвэр маш бага утга авч, компьютерт 0 болж хувирна.</p>
+<p><strong>Шийдэл:</strong> Лог хувиргалт. <span class="math inline">\(\log\)</span> функц нь strictly monotone increasing тул:</p>
+<p><span class="math display">\[\arg\max_c f(c) = \arg\max_c \log f(c)\]</span></p>
+<p><strong>Теорем 2.3 (Лог магадлалын томьёо):</strong></p>
+<p><span id="eq-log-prob"><span class="math display">\[\log P(C|\mathbf{X}) \propto \log P(C) + \sum_{i=1}^{n} \left[ X_i \log \theta_{ic} + (1-X_i) \log(1-\theta_{ic}) \right] \tag{8}\]</span></span></p>
+</section>
+</section>
+<section id="өгөгдлийн-боловсруулалт" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> Өгөгдлийн боловсруулалт</h1>
+<section id="шаардлагатай-сангуудыг-ачаалах" class="level2" data-number="3.1">
+<h2 data-number="3.1" class="anchored" data-anchor-id="шаардлагатай-сангуудыг-ачаалах"><span class="header-section-number">3.1</span> Шаардлагатай сангуудыг ачаалах</h2>
+<div id="fb853a13" class="cell" data-execution_count="2">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> collections <span class="im">import</span> Counter</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> warnings</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>warnings.filterwarnings(<span class="st">'ignore'</span>)</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="co"># График тохиргоо</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>plt.rcParams[<span class="st">'figure.figsize'</span>] <span class="op">=</span> (<span class="dv">6</span>, <span class="dv">4</span>)</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>plt.rcParams[<span class="st">'axes.unicode_minus'</span>] <span class="op">=</span> <span class="va">False</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Санамсаргүй байдлын seed тогтоох (reproducibility)</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>np.random.seed(<span class="dv">42</span>)</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Сангуудыг амжилттай ачааллаа!"</span>)</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"NumPy хувилбар: </span><span class="sc">{</span>np<span class="sc">.</span>__version__<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Pandas хувилбар: </span><span class="sc">{</span>pd<span class="sc">.</span>__version__<span class="sc">}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Сангуудыг амжилттай ачааллаа!
+NumPy хувилбар: 1.26.4
+Pandas хувилбар: 2.1.4</code></pre>
+</div>
+</div>
+</section>
+<section id="өгөгдлийг-ачаалах" class="level2" data-number="3.2">
+<h2 data-number="3.2" class="anchored" data-anchor-id="өгөгдлийг-ачаалах"><span class="header-section-number">3.2</span> Өгөгдлийг ачаалах</h2>
+<div id="e958d280" class="cell" data-execution_count="3">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>transactions <span class="op">=</span> []</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="co"># CSV файлыг ачаалах</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> <span class="bu">open</span>(<span class="st">'groceries.csv'</span>, <span class="st">'r'</span>, encoding<span class="op">=</span><span class="st">'utf-8'</span>) <span class="im">as</span> f:</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>    lines <span class="op">=</span> f.readlines()</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Эхний мөр нь header - устгана</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>lines <span class="op">=</span> lines[<span class="dv">1</span>:]</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> line <span class="kw">in</span> lines:</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>    parts <span class="op">=</span> [x.strip() <span class="cf">for</span> x <span class="kw">in</span> line.strip().split(<span class="st">','</span>) <span class="cf">if</span> x.strip()]</span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="bu">len</span>(parts) <span class="op">&lt;=</span> <span class="dv">1</span>:</span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>        <span class="cf">continue</span></span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>    cleaned_items <span class="op">=</span> parts[<span class="dv">1</span>:]  <span class="co"># Эхний багана алгасах</span></span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> cleaned_items:</span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>        transactions.append(cleaned_items)</span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Худалдан авалтын тоо: </span><span class="sc">{</span><span class="bu">len</span>(transactions)<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">Эхний 5 худалдан авалт:"</span>)</span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i, t <span class="kw">in</span> <span class="bu">enumerate</span>(transactions[:<span class="dv">5</span>], <span class="dv">1</span>):</span>
+<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"</span><span class="sc">{</span>i<span class="sc">}</span><span class="ss">. </span><span class="sc">{</span>t<span class="sc">}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Худалдан авалтын тоо: 9835
+
+Эхний 5 худалдан авалт:
+1. ['citrus fruit', 'semi-finished bread', 'margarine', 'ready soups']
+2. ['tropical fruit', 'yogurt', 'coffee']
+3. ['whole milk']
+4. ['pip fruit', 'yogurt', 'cream cheese', 'meat spreads']
+5. ['other vegetables', 'whole milk', 'condensed milk', 'long life bakery product']</code></pre>
+</div>
+</div>
+</section>
+<section id="өгөгдлийн-анхны-шинжилгээ" class="level2" data-number="3.3">
+<h2 data-number="3.3" class="anchored" data-anchor-id="өгөгдлийн-анхны-шинжилгээ"><span class="header-section-number">3.3</span> Өгөгдлийн анхны шинжилгээ</h2>
+<div id="9588cda1" class="cell" data-execution_count="4">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Бүх бүтээгдэхүүнийг цуглуулах</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>all_items <span class="op">=</span> [item <span class="cf">for</span> trans <span class="kw">in</span> transactions <span class="cf">for</span> item <span class="kw">in</span> trans]</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>unique_items <span class="op">=</span> <span class="bu">sorted</span>(<span class="bu">set</span>(all_items))</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>item_counts <span class="op">=</span> Counter(all_items)</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Өвөрмөц бүтээгдэхүүний тоо: </span><span class="sc">{</span><span class="bu">len</span>(unique_items)<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Нийт худалдан авалтын тоо: </span><span class="sc">{</span><span class="bu">len</span>(all_items)<span class="sc">:,}</span><span class="ss">"</span>)</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Худалдан авалтын хэмжээний статистик</span></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>trans_sizes <span class="op">=</span> [<span class="bu">len</span>(trans) <span class="cf">for</span> trans <span class="kw">in</span> transactions]</span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"</span><span class="ch">\n</span><span class="ss">Худалдан авалтын хэмжээ:"</span>)</span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"  - Дундаж: </span><span class="sc">{</span>np<span class="sc">.</span>mean(trans_sizes)<span class="sc">:.2f}</span><span class="ss"> бүтээгдэхүүн"</span>)</span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"  - Медиан: </span><span class="sc">{</span>np<span class="sc">.</span>median(trans_sizes)<span class="sc">:.0f}</span><span class="ss"> бүтээгдэхүүн"</span>)</span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"  - Хамгийн бага: </span><span class="sc">{</span><span class="bu">min</span>(trans_sizes)<span class="sc">}</span><span class="ss"> бүтээгдэхүүн"</span>)</span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"  - Хамгийн их: </span><span class="sc">{</span><span class="bu">max</span>(trans_sizes)<span class="sc">}</span><span class="ss"> бүтээгдэхүүн"</span>)</span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a><span class="co"># Хамгийн түгээмэл 10 бүтээгдэхүүн</span></span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"</span><span class="ch">\n</span><span class="ss">Хамгийн түгээмэл 10 бүтээгдэхүүн:"</span>)</span>
+<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> item, count <span class="kw">in</span> item_counts.most_common(<span class="dv">10</span>):</span>
+<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a>    pct <span class="op">=</span> count <span class="op">/</span> <span class="bu">len</span>(transactions) <span class="op">*</span> <span class="dv">100</span></span>
+<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"  - </span><span class="sc">{</span>item<span class="sc">}</span><span class="ss">: </span><span class="sc">{</span>count<span class="sc">:,}</span><span class="ss"> (</span><span class="sc">{</span>pct<span class="sc">:.1f}</span><span class="ss">%)"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Өвөрмөц бүтээгдэхүүний тоо: 169
+Нийт худалдан авалтын тоо: 43,367
+
+Худалдан авалтын хэмжээ:
+  - Дундаж: 4.41 бүтээгдэхүүн
+  - Медиан: 3 бүтээгдэхүүн
+  - Хамгийн бага: 1 бүтээгдэхүүн
+  - Хамгийн их: 32 бүтээгдэхүүн
+
+Хамгийн түгээмэл 10 бүтээгдэхүүн:
+  - whole milk: 2,513 (25.6%)
+  - other vegetables: 1,903 (19.3%)
+  - rolls/buns: 1,809 (18.4%)
+  - soda: 1,715 (17.4%)
+  - yogurt: 1,372 (14.0%)
+  - bottled water: 1,087 (11.1%)
+  - root vegetables: 1,072 (10.9%)
+  - tropical fruit: 1,032 (10.5%)
+  - shopping bags: 969 (9.9%)
+  - sausage: 924 (9.4%)</code></pre>
+</div>
+</div>
+<div id="cell-fig-top-products" class="cell" data-execution_count="5">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>top_15 <span class="op">=</span> item_counts.most_common(<span class="dv">15</span>)</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>items <span class="op">=</span> [x[<span class="dv">0</span>] <span class="cf">for</span> x <span class="kw">in</span> top_15]</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>counts <span class="op">=</span> [x[<span class="dv">1</span>] <span class="cf">for</span> x <span class="kw">in</span> top_15]</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">5</span>))</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>bars <span class="op">=</span> plt.barh(items[::<span class="op">-</span><span class="dv">1</span>], counts[::<span class="op">-</span><span class="dv">1</span>], color<span class="op">=</span><span class="st">'steelblue'</span>, edgecolor<span class="op">=</span><span class="st">'navy'</span>)</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'Худалдан авалтын тоо'</span>)</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'Бүтээгдэхүүн'</span>)</span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Хамгийн түгээмэл 15 бүтээгдэхүүн'</span>)</span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> bar, count <span class="kw">in</span> <span class="bu">zip</span>(bars, counts[::<span class="op">-</span><span class="dv">1</span>]):</span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>    plt.text(bar.get_width() <span class="op">+</span> <span class="dv">30</span>, bar.get_y() <span class="op">+</span> bar.get_height()<span class="op">/</span><span class="dv">2</span>, </span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>             <span class="ss">f'</span><span class="sc">{</span>count<span class="sc">:,}</span><span class="ss">'</span>, va<span class="op">=</span><span class="st">'center'</span>, fontsize<span class="op">=</span><span class="dv">9</span>)</span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="fig-top-products" class="cell-output cell-output-display quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-fig" id="fig-top-products-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Зураг&nbsp;1: Хамгийн түгээмэл 15 бүтээгдэхүүн
+</figcaption>
+<div aria-describedby="fig-top-products-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<pre><code>&lt;Figure size 768x480 with 1 Axes&gt;</code></pre>
+</div>
+</figure>
+</div>
+</div>
+</section>
+<section id="хоёртын-матриц-үүсгэх" class="level2" data-number="3.4">
+<h2 data-number="3.4" class="anchored" data-anchor-id="хоёртын-матриц-үүсгэх"><span class="header-section-number">3.4</span> Хоёртын матриц үүсгэх</h2>
+<p>Машин сургалтын загварт оруулахын тулд гүйлгээний өгөгдлийг хоёртын шинж чанарын матриц болгон хувиргана.</p>
+<div id="e8fa1bb8" class="cell" data-execution_count="6">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Зорилтот бүтээгдэхүүн</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>TARGET_ITEM <span class="op">=</span> <span class="st">'whole milk'</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Бүтээгдэхүүний индекс үүсгэх</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>feature_items <span class="op">=</span> [item <span class="cf">for</span> item <span class="kw">in</span> unique_items <span class="cf">if</span> item <span class="op">!=</span> TARGET_ITEM]</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>item_to_idx <span class="op">=</span> {item: idx <span class="cf">for</span> idx, item <span class="kw">in</span> <span class="bu">enumerate</span>(feature_items)}</span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>n_features <span class="op">=</span> <span class="bu">len</span>(feature_items)</span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Шинж чанаруудын тоо: </span><span class="sc">{</span>n_features<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Хоёртын матриц үүсгэх</span></span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> np.zeros((<span class="bu">len</span>(transactions), n_features), dtype<span class="op">=</span>np.int8)</span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> np.zeros(<span class="bu">len</span>(transactions), dtype<span class="op">=</span>np.int8)</span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i, trans <span class="kw">in</span> <span class="bu">enumerate</span>(transactions):</span>
+<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> TARGET_ITEM <span class="kw">in</span> trans:</span>
+<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a>        y[i] <span class="op">=</span> <span class="dv">1</span></span>
+<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> item <span class="kw">in</span> trans:</span>
+<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> item <span class="op">!=</span> TARGET_ITEM <span class="kw">and</span> item <span class="kw">in</span> item_to_idx:</span>
+<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a>            X[i, item_to_idx[item]] <span class="op">=</span> <span class="dv">1</span></span>
+<span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Шинж чанарын матрицын хэмжээ: </span><span class="sc">{</span>X<span class="sc">.</span>shape<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb9-23"><a href="#cb9-23" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Зорилтот вектор хэмжээ: </span><span class="sc">{</span>y<span class="sc">.</span>shape<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb9-24"><a href="#cb9-24" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"</span><span class="ch">\n</span><span class="ss">Зорилтот хувьсагчийн тархалт:"</span>)</span>
+<span id="cb9-25"><a href="#cb9-25" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"  - '</span><span class="sc">{</span>TARGET_ITEM<span class="sc">}</span><span class="ss">' АВААГҮЙ (y=0): </span><span class="sc">{</span>np<span class="sc">.</span><span class="bu">sum</span>(y<span class="op">==</span><span class="dv">0</span>)<span class="sc">:,}</span><span class="ss"> (</span><span class="sc">{</span>np<span class="sc">.</span>mean(y<span class="op">==</span><span class="dv">0</span>)<span class="op">*</span><span class="dv">100</span><span class="sc">:.1f}</span><span class="ss">%)"</span>)</span>
+<span id="cb9-26"><a href="#cb9-26" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"  - '</span><span class="sc">{</span>TARGET_ITEM<span class="sc">}</span><span class="ss">' АВСАН (y=1): </span><span class="sc">{</span>np<span class="sc">.</span><span class="bu">sum</span>(y<span class="op">==</span><span class="dv">1</span>)<span class="sc">:,}</span><span class="ss"> (</span><span class="sc">{</span>np<span class="sc">.</span>mean(y<span class="op">==</span><span class="dv">1</span>)<span class="op">*</span><span class="dv">100</span><span class="sc">:.1f}</span><span class="ss">%)"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Шинж чанаруудын тоо: 168
+Шинж чанарын матрицын хэмжээ: (9835, 168)
+Зорилтот вектор хэмжээ: (9835,)
+
+Зорилтот хувьсагчийн тархалт:
+  - 'whole milk' АВААГҮЙ (y=0): 7,322 (74.4%)
+  - 'whole milk' АВСАН (y=1): 2,513 (25.6%)</code></pre>
+</div>
+</div>
+</section>
+<section id="өгөгдлийг-хуваах" class="level2" data-number="3.5">
+<h2 data-number="3.5" class="anchored" data-anchor-id="өгөгдлийг-хуваах"><span class="header-section-number">3.5</span> Өгөгдлийг хуваах</h2>
+<div id="9a787970" class="cell" data-execution_count="7">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> train_test_split(X, y, test_size<span class="op">=</span><span class="fl">0.2</span>, random_state<span class="op">=</span><span class="dv">42</span>):</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""Өгөгдлийг сургалтын ба тестийн хэсэгт хуваах."""</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>    np.random.seed(random_state)</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>    n_samples <span class="op">=</span> <span class="bu">len</span>(y)</span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>    indices <span class="op">=</span> np.random.permutation(n_samples)</span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>    test_count <span class="op">=</span> <span class="bu">int</span>(n_samples <span class="op">*</span> test_size)</span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>    test_indices <span class="op">=</span> indices[:test_count]</span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>    train_indices <span class="op">=</span> indices[test_count:]</span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> X[train_indices], X[test_indices], y[train_indices], y[test_indices]</span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Өгөгдлийг 80/20 харьцаагаар хуваах</span></span>
+<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a>X_train, X_test, y_train, y_test <span class="op">=</span> train_test_split(X, y, test_size<span class="op">=</span><span class="fl">0.2</span>, random_state<span class="op">=</span><span class="dv">42</span>)</span>
+<span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-16"><a href="#cb11-16" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Сургалтын өгөгдөл: </span><span class="sc">{</span>X_train<span class="sc">.</span>shape[<span class="dv">0</span>]<span class="sc">:,}</span><span class="ss"> жишээ"</span>)</span>
+<span id="cb11-17"><a href="#cb11-17" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Тестийн өгөгдөл: </span><span class="sc">{</span>X_test<span class="sc">.</span>shape[<span class="dv">0</span>]<span class="sc">:,}</span><span class="ss"> жишээ"</span>)</span>
+<span id="cb11-18"><a href="#cb11-18" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"</span><span class="ch">\n</span><span class="ss">Сургалтын зорилтот тархалт:"</span>)</span>
+<span id="cb11-19"><a href="#cb11-19" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"  - y=0: </span><span class="sc">{</span>np<span class="sc">.</span><span class="bu">sum</span>(y_train<span class="op">==</span><span class="dv">0</span>)<span class="sc">:,}</span><span class="ss"> (</span><span class="sc">{</span>np<span class="sc">.</span>mean(y_train<span class="op">==</span><span class="dv">0</span>)<span class="op">*</span><span class="dv">100</span><span class="sc">:.1f}</span><span class="ss">%)"</span>)</span>
+<span id="cb11-20"><a href="#cb11-20" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"  - y=1: </span><span class="sc">{</span>np<span class="sc">.</span><span class="bu">sum</span>(y_train<span class="op">==</span><span class="dv">1</span>)<span class="sc">:,}</span><span class="ss"> (</span><span class="sc">{</span>np<span class="sc">.</span>mean(y_train<span class="op">==</span><span class="dv">1</span>)<span class="op">*</span><span class="dv">100</span><span class="sc">:.1f}</span><span class="ss">%)"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Сургалтын өгөгдөл: 7,868 жишээ
+Тестийн өгөгдөл: 1,967 жишээ
+
+Сургалтын зорилтот тархалт:
+  - y=0: 5,826 (74.0%)
+  - y=1: 2,042 (26.0%)</code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="бернуллийн-наив-байес-загварыг-бүтээх" class="level1" data-number="4">
+<h1 data-number="4"><span class="header-section-number">4</span> Бернуллийн Наив Байес загварыг бүтээх</h1>
+<section id="загварын-класс" class="level2" data-number="4.1">
+<h2 data-number="4.1" class="anchored" data-anchor-id="загварын-класс"><span class="header-section-number">4.1</span> Загварын класс</h2>
+<p>Энэ хэсэгт <a href="#eq-bnb-classifier" class="quarto-xref">Equation&nbsp;5</a> теоремд үндэслэн Бернуллийн Наив Байес алгоритмыг Python хэлээр эхнээс нь бичнэ.</p>
+<div id="bbbda45f" class="cell" data-execution_count="8">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> BernoulliNaiveBayes:</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="co">    Бернуллийн Наив Байес ангилагч.</span></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="co">    </span></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a><span class="co">    Математик үндэслэл:</span></span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a><span class="co">    - Таамаглал: Ĉ = argmax_c P(C=c) ∏ᵢ P(Xᵢ|C=c)</span></span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a><span class="co">    - Бернуллийн тархалт: P(Xᵢ|C) = θᵢc^Xᵢ · (1-θᵢc)^(1-Xᵢ)</span></span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a><span class="co">    - Лапласын тэгшитгэл: θᵢc = (Nᵢc + α) / (Nc + 2α)</span></span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, alpha<span class="op">=</span><span class="fl">1.0</span>):</span>
+<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.alpha <span class="op">=</span> alpha</span>
+<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.class_prior_ <span class="op">=</span> <span class="va">None</span></span>
+<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.feature_prob_ <span class="op">=</span> <span class="va">None</span></span>
+<span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.classes_ <span class="op">=</span> <span class="va">None</span></span>
+<span id="cb13-16"><a href="#cb13-16" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.n_features_ <span class="op">=</span> <span class="va">None</span></span>
+<span id="cb13-17"><a href="#cb13-17" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb13-18"><a href="#cb13-18" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> fit(<span class="va">self</span>, X, y):</span>
+<span id="cb13-19"><a href="#cb13-19" aria-hidden="true" tabindex="-1"></a>        <span class="co">"""Загварыг сургах - параметрүүдийг үнэлэх."""</span></span>
+<span id="cb13-20"><a href="#cb13-20" aria-hidden="true" tabindex="-1"></a>        X <span class="op">=</span> np.array(X)</span>
+<span id="cb13-21"><a href="#cb13-21" aria-hidden="true" tabindex="-1"></a>        y <span class="op">=</span> np.array(y)</span>
+<span id="cb13-22"><a href="#cb13-22" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb13-23"><a href="#cb13-23" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.classes_ <span class="op">=</span> np.unique(y)</span>
+<span id="cb13-24"><a href="#cb13-24" aria-hidden="true" tabindex="-1"></a>        n_classes <span class="op">=</span> <span class="bu">len</span>(<span class="va">self</span>.classes_)</span>
+<span id="cb13-25"><a href="#cb13-25" aria-hidden="true" tabindex="-1"></a>        n_samples, <span class="va">self</span>.n_features_ <span class="op">=</span> X.shape</span>
+<span id="cb13-26"><a href="#cb13-26" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb13-27"><a href="#cb13-27" aria-hidden="true" tabindex="-1"></a>        <span class="co"># P(C) үнэлэх</span></span>
+<span id="cb13-28"><a href="#cb13-28" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.class_prior_ <span class="op">=</span> np.zeros(n_classes)</span>
+<span id="cb13-29"><a href="#cb13-29" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> idx, c <span class="kw">in</span> <span class="bu">enumerate</span>(<span class="va">self</span>.classes_):</span>
+<span id="cb13-30"><a href="#cb13-30" aria-hidden="true" tabindex="-1"></a>            <span class="va">self</span>.class_prior_[idx] <span class="op">=</span> np.<span class="bu">sum</span>(y <span class="op">==</span> c) <span class="op">/</span> n_samples</span>
+<span id="cb13-31"><a href="#cb13-31" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb13-32"><a href="#cb13-32" aria-hidden="true" tabindex="-1"></a>        <span class="co"># P(Xᵢ=1|C) үнэлэх - Лапласын тэгшитгэлтэй</span></span>
+<span id="cb13-33"><a href="#cb13-33" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.feature_prob_ <span class="op">=</span> np.zeros((n_classes, <span class="va">self</span>.n_features_))</span>
+<span id="cb13-34"><a href="#cb13-34" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb13-35"><a href="#cb13-35" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> idx, c <span class="kw">in</span> <span class="bu">enumerate</span>(<span class="va">self</span>.classes_):</span>
+<span id="cb13-36"><a href="#cb13-36" aria-hidden="true" tabindex="-1"></a>            X_c <span class="op">=</span> X[y <span class="op">==</span> c]</span>
+<span id="cb13-37"><a href="#cb13-37" aria-hidden="true" tabindex="-1"></a>            N_c <span class="op">=</span> X_c.shape[<span class="dv">0</span>]</span>
+<span id="cb13-38"><a href="#cb13-38" aria-hidden="true" tabindex="-1"></a>            </span>
+<span id="cb13-39"><a href="#cb13-39" aria-hidden="true" tabindex="-1"></a>            <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="va">self</span>.n_features_):</span>
+<span id="cb13-40"><a href="#cb13-40" aria-hidden="true" tabindex="-1"></a>                N_ic <span class="op">=</span> np.<span class="bu">sum</span>(X_c[:, i])</span>
+<span id="cb13-41"><a href="#cb13-41" aria-hidden="true" tabindex="-1"></a>                <span class="va">self</span>.feature_prob_[idx, i] <span class="op">=</span> (N_ic <span class="op">+</span> <span class="va">self</span>.alpha) <span class="op">/</span> (N_c <span class="op">+</span> <span class="dv">2</span> <span class="op">*</span> <span class="va">self</span>.alpha)</span>
+<span id="cb13-42"><a href="#cb13-42" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb13-43"><a href="#cb13-43" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="va">self</span></span>
+<span id="cb13-44"><a href="#cb13-44" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb13-45"><a href="#cb13-45" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> _compute_log_likelihood(<span class="va">self</span>, X):</span>
+<span id="cb13-46"><a href="#cb13-46" aria-hidden="true" tabindex="-1"></a>        <span class="co">"""Лог likelihood тооцоолох."""</span></span>
+<span id="cb13-47"><a href="#cb13-47" aria-hidden="true" tabindex="-1"></a>        n_samples <span class="op">=</span> X.shape[<span class="dv">0</span>]</span>
+<span id="cb13-48"><a href="#cb13-48" aria-hidden="true" tabindex="-1"></a>        n_classes <span class="op">=</span> <span class="bu">len</span>(<span class="va">self</span>.classes_)</span>
+<span id="cb13-49"><a href="#cb13-49" aria-hidden="true" tabindex="-1"></a>        log_prob <span class="op">=</span> np.zeros((n_samples, n_classes))</span>
+<span id="cb13-50"><a href="#cb13-50" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb13-51"><a href="#cb13-51" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> idx, c <span class="kw">in</span> <span class="bu">enumerate</span>(<span class="va">self</span>.classes_):</span>
+<span id="cb13-52"><a href="#cb13-52" aria-hidden="true" tabindex="-1"></a>            log_prior <span class="op">=</span> np.log(<span class="va">self</span>.class_prior_[idx])</span>
+<span id="cb13-53"><a href="#cb13-53" aria-hidden="true" tabindex="-1"></a>            theta <span class="op">=</span> <span class="va">self</span>.feature_prob_[idx]</span>
+<span id="cb13-54"><a href="#cb13-54" aria-hidden="true" tabindex="-1"></a>            log_theta <span class="op">=</span> np.log(theta)</span>
+<span id="cb13-55"><a href="#cb13-55" aria-hidden="true" tabindex="-1"></a>            log_1_theta <span class="op">=</span> np.log(<span class="dv">1</span> <span class="op">-</span> theta)</span>
+<span id="cb13-56"><a href="#cb13-56" aria-hidden="true" tabindex="-1"></a>            </span>
+<span id="cb13-57"><a href="#cb13-57" aria-hidden="true" tabindex="-1"></a>            log_likelihood <span class="op">=</span> X <span class="op">@</span> log_theta <span class="op">+</span> (<span class="dv">1</span> <span class="op">-</span> X) <span class="op">@</span> log_1_theta</span>
+<span id="cb13-58"><a href="#cb13-58" aria-hidden="true" tabindex="-1"></a>            log_prob[:, idx] <span class="op">=</span> log_prior <span class="op">+</span> log_likelihood</span>
+<span id="cb13-59"><a href="#cb13-59" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb13-60"><a href="#cb13-60" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> log_prob</span>
+<span id="cb13-61"><a href="#cb13-61" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb13-62"><a href="#cb13-62" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> predict(<span class="va">self</span>, X):</span>
+<span id="cb13-63"><a href="#cb13-63" aria-hidden="true" tabindex="-1"></a>        <span class="co">"""Ангилал таамаглах."""</span></span>
+<span id="cb13-64"><a href="#cb13-64" aria-hidden="true" tabindex="-1"></a>        X <span class="op">=</span> np.array(X)</span>
+<span id="cb13-65"><a href="#cb13-65" aria-hidden="true" tabindex="-1"></a>        log_prob <span class="op">=</span> <span class="va">self</span>._compute_log_likelihood(X)</span>
+<span id="cb13-66"><a href="#cb13-66" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="va">self</span>.classes_[np.argmax(log_prob, axis<span class="op">=</span><span class="dv">1</span>)]</span>
+<span id="cb13-67"><a href="#cb13-67" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb13-68"><a href="#cb13-68" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> predict_proba(<span class="va">self</span>, X):</span>
+<span id="cb13-69"><a href="#cb13-69" aria-hidden="true" tabindex="-1"></a>        <span class="co">"""Класс магадлалуудыг тооцоолох."""</span></span>
+<span id="cb13-70"><a href="#cb13-70" aria-hidden="true" tabindex="-1"></a>        X <span class="op">=</span> np.array(X)</span>
+<span id="cb13-71"><a href="#cb13-71" aria-hidden="true" tabindex="-1"></a>        log_prob <span class="op">=</span> <span class="va">self</span>._compute_log_likelihood(X)</span>
+<span id="cb13-72"><a href="#cb13-72" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb13-73"><a href="#cb13-73" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Log-sum-exp trick</span></span>
+<span id="cb13-74"><a href="#cb13-74" aria-hidden="true" tabindex="-1"></a>        log_prob_max <span class="op">=</span> np.<span class="bu">max</span>(log_prob, axis<span class="op">=</span><span class="dv">1</span>, keepdims<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb13-75"><a href="#cb13-75" aria-hidden="true" tabindex="-1"></a>        log_prob_shifted <span class="op">=</span> log_prob <span class="op">-</span> log_prob_max</span>
+<span id="cb13-76"><a href="#cb13-76" aria-hidden="true" tabindex="-1"></a>        prob <span class="op">=</span> np.exp(log_prob_shifted)</span>
+<span id="cb13-77"><a href="#cb13-77" aria-hidden="true" tabindex="-1"></a>        prob <span class="op">=</span> prob <span class="op">/</span> np.<span class="bu">sum</span>(prob, axis<span class="op">=</span><span class="dv">1</span>, keepdims<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb13-78"><a href="#cb13-78" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb13-79"><a href="#cb13-79" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> prob</span>
+<span id="cb13-80"><a href="#cb13-80" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb13-81"><a href="#cb13-81" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> get_feature_importance(<span class="va">self</span>, feature_names):</span>
+<span id="cb13-82"><a href="#cb13-82" aria-hidden="true" tabindex="-1"></a>        <span class="co">"""Шинж чанаруудын ач холбогдлыг тооцоолох."""</span></span>
+<span id="cb13-83"><a href="#cb13-83" aria-hidden="true" tabindex="-1"></a>        log_ratio <span class="op">=</span> np.<span class="bu">abs</span>(np.log(<span class="va">self</span>.feature_prob_[<span class="dv">1</span>]) <span class="op">-</span> np.log(<span class="va">self</span>.feature_prob_[<span class="dv">0</span>]))</span>
+<span id="cb13-84"><a href="#cb13-84" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb13-85"><a href="#cb13-85" aria-hidden="true" tabindex="-1"></a>        importance_df <span class="op">=</span> pd.DataFrame({</span>
+<span id="cb13-86"><a href="#cb13-86" aria-hidden="true" tabindex="-1"></a>            <span class="st">'feature'</span>: feature_names,</span>
+<span id="cb13-87"><a href="#cb13-87" aria-hidden="true" tabindex="-1"></a>            <span class="st">'importance'</span>: log_ratio,</span>
+<span id="cb13-88"><a href="#cb13-88" aria-hidden="true" tabindex="-1"></a>            <span class="st">'prob_class_0'</span>: <span class="va">self</span>.feature_prob_[<span class="dv">0</span>],</span>
+<span id="cb13-89"><a href="#cb13-89" aria-hidden="true" tabindex="-1"></a>            <span class="st">'prob_class_1'</span>: <span class="va">self</span>.feature_prob_[<span class="dv">1</span>]</span>
+<span id="cb13-90"><a href="#cb13-90" aria-hidden="true" tabindex="-1"></a>        })</span>
+<span id="cb13-91"><a href="#cb13-91" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb13-92"><a href="#cb13-92" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> importance_df.sort_values(<span class="st">'importance'</span>, ascending<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb13-93"><a href="#cb13-93" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-94"><a href="#cb13-94" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"BernoulliNaiveBayes класс амжилттай үүсгэгдлээ!"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>BernoulliNaiveBayes класс амжилттай үүсгэгдлээ!</code></pre>
+</div>
+</div>
+</section>
+<section id="загварыг-сургах" class="level2" data-number="4.2">
+<h2 data-number="4.2" class="anchored" data-anchor-id="загварыг-сургах"><span class="header-section-number">4.2</span> Загварыг сургах</h2>
+<div id="867f04b1" class="cell" data-execution_count="9">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Загвар үүсгэх (α=1 Лапласын тэгшитгэлтэй)</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> BernoulliNaiveBayes(alpha<span class="op">=</span><span class="fl">1.0</span>)</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Сургах</span></span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>model.fit(X_train, y_train)</span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Загвар амжилттай сургагдлаа!"</span>)</span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"</span><span class="ch">\n</span><span class="ss">Өмнөх магадлал P(C):"</span>)</span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"  - P(y=0) = </span><span class="sc">{</span>model<span class="sc">.</span>class_prior_[<span class="dv">0</span>]<span class="sc">:.4f}</span><span class="ss">"</span>)</span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"  - P(y=1) = </span><span class="sc">{</span>model<span class="sc">.</span>class_prior_[<span class="dv">1</span>]<span class="sc">:.4f}</span><span class="ss">"</span>)</span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Зарим нөхцөлт магадлалыг харуулах</span></span>
+<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"</span><span class="ch">\n</span><span class="ss">Зарим нөхцөлт магадлал P(X=1|C):"</span>)</span>
+<span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a>sample_features <span class="op">=</span> [<span class="st">'yogurt'</span>, <span class="st">'other vegetables'</span>, <span class="st">'rolls/buns'</span>, <span class="st">'soda'</span>, <span class="st">'tropical fruit'</span>]</span>
+<span id="cb15-15"><a href="#cb15-15" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> feat <span class="kw">in</span> sample_features:</span>
+<span id="cb15-16"><a href="#cb15-16" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> feat <span class="kw">in</span> item_to_idx:</span>
+<span id="cb15-17"><a href="#cb15-17" aria-hidden="true" tabindex="-1"></a>        idx <span class="op">=</span> item_to_idx[feat]</span>
+<span id="cb15-18"><a href="#cb15-18" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="ss">f"  - P(</span><span class="sc">{</span>feat<span class="sc">}</span><span class="ss">=1 | y=0) = </span><span class="sc">{</span>model<span class="sc">.</span>feature_prob_[<span class="dv">0</span>, idx]<span class="sc">:.4f}</span><span class="ss">"</span>)</span>
+<span id="cb15-19"><a href="#cb15-19" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="ss">f"  - P(</span><span class="sc">{</span>feat<span class="sc">}</span><span class="ss">=1 | y=1) = </span><span class="sc">{</span>model<span class="sc">.</span>feature_prob_[<span class="dv">1</span>, idx]<span class="sc">:.4f}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Загвар амжилттай сургагдлаа!
+
+Өмнөх магадлал P(C):
+  - P(y=0) = 0.7405
+  - P(y=1) = 0.2595
+
+Зарим нөхцөлт магадлал P(X=1|C):
+  - P(yogurt=1 | y=0) = 0.1158
+  - P(yogurt=1 | y=1) = 0.2172
+  - P(other vegetables=1 | y=0) = 0.1604
+  - P(other vegetables=1 | y=1) = 0.2911
+  - P(rolls/buns=1 | y=0) = 0.1712
+  - P(rolls/buns=1 | y=1) = 0.2197
+  - P(soda=1 | y=0) = 0.1795
+  - P(soda=1 | y=1) = 0.1546
+  - P(tropical fruit=1 | y=0) = 0.0858
+  - P(tropical fruit=1 | y=1) = 0.1639</code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="загварын-үнэлгээ" class="level1" data-number="5">
+<h1 data-number="5"><span class="header-section-number">5</span> Загварын үнэлгээ</h1>
+<section id="үнэлгээний-хэмжигдэхүүнүүд" class="level2" data-number="5.1">
+<h2 data-number="5.1" class="anchored" data-anchor-id="үнэлгээний-хэмжигдэхүүнүүд"><span class="header-section-number">5.1</span> Үнэлгээний хэмжигдэхүүнүүд</h2>
+<p>Ангиллын загварын гүйцэтгэлийг үнэлэхэд дараах хэмжигдэхүүнүүдийг ашиглана <span class="citation" data-cites="james2021introduction">James et al. (<a href="#ref-james2021introduction" role="doc-biblioref">2021</a>)</span>:</p>
+<ul>
+<li><strong>Нарийвчлал (Accuracy)</strong>: <span class="math inline">\(\frac{TP + TN}{TP + TN + FP + FN}\)</span></li>
+<li><strong>Precision</strong>: <span class="math inline">\(\frac{TP}{TP + FP}\)</span></li>
+<li><strong>Recall</strong>: <span class="math inline">\(\frac{TP}{TP + FN}\)</span></li>
+<li><strong>F1 Score</strong>: <span class="math inline">\(2 \cdot \frac{Precision \cdot Recall}{Precision + Recall}\)</span></li>
+</ul>
+<div id="e6c112ae" class="cell" data-execution_count="10">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> confusion_matrix(y_true, y_pred):</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""Төөрөгдлийн матриц тооцоолох"""</span></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>    tp <span class="op">=</span> np.<span class="bu">sum</span>((y_true <span class="op">==</span> <span class="dv">1</span>) <span class="op">&amp;</span> (y_pred <span class="op">==</span> <span class="dv">1</span>))</span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>    tn <span class="op">=</span> np.<span class="bu">sum</span>((y_true <span class="op">==</span> <span class="dv">0</span>) <span class="op">&amp;</span> (y_pred <span class="op">==</span> <span class="dv">0</span>))</span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>    fp <span class="op">=</span> np.<span class="bu">sum</span>((y_true <span class="op">==</span> <span class="dv">0</span>) <span class="op">&amp;</span> (y_pred <span class="op">==</span> <span class="dv">1</span>))</span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>    fn <span class="op">=</span> np.<span class="bu">sum</span>((y_true <span class="op">==</span> <span class="dv">1</span>) <span class="op">&amp;</span> (y_pred <span class="op">==</span> <span class="dv">0</span>))</span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> np.array([[tn, fp], [fn, tp]])</span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> accuracy_score(y_true, y_pred):</span>
+<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> np.mean(y_true <span class="op">==</span> y_pred)</span>
+<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> precision_score(y_true, y_pred):</span>
+<span id="cb17-13"><a href="#cb17-13" aria-hidden="true" tabindex="-1"></a>    tp <span class="op">=</span> np.<span class="bu">sum</span>((y_true <span class="op">==</span> <span class="dv">1</span>) <span class="op">&amp;</span> (y_pred <span class="op">==</span> <span class="dv">1</span>))</span>
+<span id="cb17-14"><a href="#cb17-14" aria-hidden="true" tabindex="-1"></a>    fp <span class="op">=</span> np.<span class="bu">sum</span>((y_true <span class="op">==</span> <span class="dv">0</span>) <span class="op">&amp;</span> (y_pred <span class="op">==</span> <span class="dv">1</span>))</span>
+<span id="cb17-15"><a href="#cb17-15" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> tp <span class="op">/</span> (tp <span class="op">+</span> fp) <span class="cf">if</span> (tp <span class="op">+</span> fp) <span class="op">&gt;</span> <span class="dv">0</span> <span class="cf">else</span> <span class="dv">0</span></span>
+<span id="cb17-16"><a href="#cb17-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-17"><a href="#cb17-17" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> recall_score(y_true, y_pred):</span>
+<span id="cb17-18"><a href="#cb17-18" aria-hidden="true" tabindex="-1"></a>    tp <span class="op">=</span> np.<span class="bu">sum</span>((y_true <span class="op">==</span> <span class="dv">1</span>) <span class="op">&amp;</span> (y_pred <span class="op">==</span> <span class="dv">1</span>))</span>
+<span id="cb17-19"><a href="#cb17-19" aria-hidden="true" tabindex="-1"></a>    fn <span class="op">=</span> np.<span class="bu">sum</span>((y_true <span class="op">==</span> <span class="dv">1</span>) <span class="op">&amp;</span> (y_pred <span class="op">==</span> <span class="dv">0</span>))</span>
+<span id="cb17-20"><a href="#cb17-20" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> tp <span class="op">/</span> (tp <span class="op">+</span> fn) <span class="cf">if</span> (tp <span class="op">+</span> fn) <span class="op">&gt;</span> <span class="dv">0</span> <span class="cf">else</span> <span class="dv">0</span></span>
+<span id="cb17-21"><a href="#cb17-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-22"><a href="#cb17-22" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> f1_score(y_true, y_pred):</span>
+<span id="cb17-23"><a href="#cb17-23" aria-hidden="true" tabindex="-1"></a>    prec <span class="op">=</span> precision_score(y_true, y_pred)</span>
+<span id="cb17-24"><a href="#cb17-24" aria-hidden="true" tabindex="-1"></a>    rec <span class="op">=</span> recall_score(y_true, y_pred)</span>
+<span id="cb17-25"><a href="#cb17-25" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">2</span> <span class="op">*</span> prec <span class="op">*</span> rec <span class="op">/</span> (prec <span class="op">+</span> rec) <span class="cf">if</span> (prec <span class="op">+</span> rec) <span class="op">&gt;</span> <span class="dv">0</span> <span class="cf">else</span> <span class="dv">0</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="таамаглал-ба-үнэлгээ" class="level2" data-number="5.2">
+<h2 data-number="5.2" class="anchored" data-anchor-id="таамаглал-ба-үнэлгээ"><span class="header-section-number">5.2</span> Таамаглал ба үнэлгээ</h2>
+<div id="db3c655f" class="cell" data-execution_count="11">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Тест дээр таамаглах</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>y_test_pred <span class="op">=</span> model.predict(X_test)</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>y_test_proba <span class="op">=</span> model.predict_proba(X_test)</span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Төөрөгдлийн матриц</span></span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>cm <span class="op">=</span> confusion_matrix(y_test, y_test_pred)</span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"ЗАГВАРЫН ҮНЭЛГЭЭ"</span>)</span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"="</span> <span class="op">*</span> <span class="dv">50</span>)</span>
+<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">1. ТӨӨРӨГДЛИЙН МАТРИЦ:"</span>)</span>
+<span id="cb18-12"><a href="#cb18-12" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"                    Таамагласан"</span>)</span>
+<span id="cb18-13"><a href="#cb18-13" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"                  0 (Аваагүй)  1 (Авсан)"</span>)</span>
+<span id="cb18-14"><a href="#cb18-14" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Бодит  0 (Аваагүй)     </span><span class="sc">{</span>cm[<span class="dv">0</span>,<span class="dv">0</span>]<span class="sc">:&gt;4}</span><span class="ss">          </span><span class="sc">{</span>cm[<span class="dv">0</span>,<span class="dv">1</span>]<span class="sc">:&gt;3}</span><span class="ss">"</span>)</span>
+<span id="cb18-15"><a href="#cb18-15" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"       1 (Авсан)        </span><span class="sc">{</span>cm[<span class="dv">1</span>,<span class="dv">0</span>]<span class="sc">:&gt;3}</span><span class="ss">          </span><span class="sc">{</span>cm[<span class="dv">1</span>,<span class="dv">1</span>]<span class="sc">:&gt;3}</span><span class="ss">"</span>)</span>
+<span id="cb18-16"><a href="#cb18-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-17"><a href="#cb18-17" aria-hidden="true" tabindex="-1"></a>acc <span class="op">=</span> accuracy_score(y_test, y_test_pred)</span>
+<span id="cb18-18"><a href="#cb18-18" aria-hidden="true" tabindex="-1"></a>prec <span class="op">=</span> precision_score(y_test, y_test_pred)</span>
+<span id="cb18-19"><a href="#cb18-19" aria-hidden="true" tabindex="-1"></a>rec <span class="op">=</span> recall_score(y_test, y_test_pred)</span>
+<span id="cb18-20"><a href="#cb18-20" aria-hidden="true" tabindex="-1"></a>f1 <span class="op">=</span> f1_score(y_test, y_test_pred)</span>
+<span id="cb18-21"><a href="#cb18-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-22"><a href="#cb18-22" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">2. ҮНЭЛГЭЭНИЙ ХЭМЖИГДЭХҮҮНҮҮД:"</span>)</span>
+<span id="cb18-23"><a href="#cb18-23" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"  - Нарийвчлал (Accuracy):  </span><span class="sc">{</span>acc<span class="sc">:.4f}</span><span class="ss">"</span>)</span>
+<span id="cb18-24"><a href="#cb18-24" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"  - Precision:              </span><span class="sc">{</span>prec<span class="sc">:.4f}</span><span class="ss">"</span>)</span>
+<span id="cb18-25"><a href="#cb18-25" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"  - Recall:                 </span><span class="sc">{</span>rec<span class="sc">:.4f}</span><span class="ss">"</span>)</span>
+<span id="cb18-26"><a href="#cb18-26" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"  - F1 Score:               </span><span class="sc">{</span>f1<span class="sc">:.4f}</span><span class="ss">"</span>)</span>
+<span id="cb18-27"><a href="#cb18-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-28"><a href="#cb18-28" aria-hidden="true" tabindex="-1"></a>conclusion.append(<span class="ss">f"Загварын нарийвчлал </span><span class="sc">{</span>acc<span class="op">*</span><span class="dv">100</span><span class="sc">:.1f}</span><span class="ss">%, F1 оноо </span><span class="sc">{</span>f1<span class="sc">:.4f}</span><span class="ss"> байна."</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>ЗАГВАРЫН ҮНЭЛГЭЭ
+==================================================
+
+1. ТӨӨРӨГДЛИЙН МАТРИЦ:
+                    Таамагласан
+                  0 (Аваагүй)  1 (Авсан)
+Бодит  0 (Аваагүй)     1290          206
+       1 (Авсан)        281          190
+
+2. ҮНЭЛГЭЭНИЙ ХЭМЖИГДЭХҮҮНҮҮД:
+  - Нарийвчлал (Accuracy):  0.7524
+  - Precision:              0.4798
+  - Recall:                 0.4034
+  - F1 Score:               0.4383</code></pre>
+</div>
+</div>
+<div id="cell-fig-confusion-matrix" class="cell" data-execution_count="12">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">6</span>, <span class="dv">5</span>))</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>sns.heatmap(cm, annot<span class="op">=</span><span class="va">True</span>, fmt<span class="op">=</span><span class="st">'d'</span>, cmap<span class="op">=</span><span class="st">'Blues'</span>, </span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>            xticklabels<span class="op">=</span>[<span class="st">'Аваагүй (0)'</span>, <span class="st">'Авсан (1)'</span>],</span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>            yticklabels<span class="op">=</span>[<span class="st">'Аваагүй (0)'</span>, <span class="st">'Авсан (1)'</span>])</span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'Таамагласан'</span>)</span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'Бодит'</span>)</span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="ss">f'Төөрөгдлийн матриц</span><span class="ch">\n</span><span class="ss">Нарийвчлал: </span><span class="sc">{</span>acc<span class="sc">:.2%}</span><span class="ss">'</span>)</span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
+<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="fig-confusion-matrix" class="cell-output cell-output-display quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-fig" id="fig-confusion-matrix-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Зураг&nbsp;2: Төөрөгдлийн матриц (Confusion Matrix)
+</figcaption>
+<div aria-describedby="fig-confusion-matrix-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<pre><code>&lt;Figure size 576x480 with 2 Axes&gt;</code></pre>
+</div>
+</figure>
+</div>
+</div>
+</section>
+<section id="roc-муруй-ба-auc" class="level2" data-number="5.3">
+<h2 data-number="5.3" class="anchored" data-anchor-id="roc-муруй-ба-auc"><span class="header-section-number">5.3</span> ROC муруй ба AUC</h2>
+<div id="cell-fig-roc-curve" class="cell" data-execution_count="13">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> roc_curve(y_true, y_score, n_thresholds<span class="op">=</span><span class="dv">100</span>):</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""ROC муруйн цэгүүдийг тооцоолох"""</span></span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>    thresholds <span class="op">=</span> np.linspace(<span class="dv">0</span>, <span class="dv">1</span>, n_thresholds)</span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>    tpr_list, fpr_list <span class="op">=</span> [], []</span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> thresh <span class="kw">in</span> thresholds:</span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>        y_pred <span class="op">=</span> (y_score <span class="op">&gt;=</span> thresh).astype(<span class="bu">int</span>)</span>
+<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a>        tp <span class="op">=</span> np.<span class="bu">sum</span>((y_true <span class="op">==</span> <span class="dv">1</span>) <span class="op">&amp;</span> (y_pred <span class="op">==</span> <span class="dv">1</span>))</span>
+<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a>        fn <span class="op">=</span> np.<span class="bu">sum</span>((y_true <span class="op">==</span> <span class="dv">1</span>) <span class="op">&amp;</span> (y_pred <span class="op">==</span> <span class="dv">0</span>))</span>
+<span id="cb22-10"><a href="#cb22-10" aria-hidden="true" tabindex="-1"></a>        fp <span class="op">=</span> np.<span class="bu">sum</span>((y_true <span class="op">==</span> <span class="dv">0</span>) <span class="op">&amp;</span> (y_pred <span class="op">==</span> <span class="dv">1</span>))</span>
+<span id="cb22-11"><a href="#cb22-11" aria-hidden="true" tabindex="-1"></a>        tn <span class="op">=</span> np.<span class="bu">sum</span>((y_true <span class="op">==</span> <span class="dv">0</span>) <span class="op">&amp;</span> (y_pred <span class="op">==</span> <span class="dv">0</span>))</span>
+<span id="cb22-12"><a href="#cb22-12" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb22-13"><a href="#cb22-13" aria-hidden="true" tabindex="-1"></a>        tpr <span class="op">=</span> tp <span class="op">/</span> (tp <span class="op">+</span> fn) <span class="cf">if</span> (tp <span class="op">+</span> fn) <span class="op">&gt;</span> <span class="dv">0</span> <span class="cf">else</span> <span class="dv">0</span></span>
+<span id="cb22-14"><a href="#cb22-14" aria-hidden="true" tabindex="-1"></a>        fpr <span class="op">=</span> fp <span class="op">/</span> (fp <span class="op">+</span> tn) <span class="cf">if</span> (fp <span class="op">+</span> tn) <span class="op">&gt;</span> <span class="dv">0</span> <span class="cf">else</span> <span class="dv">0</span></span>
+<span id="cb22-15"><a href="#cb22-15" aria-hidden="true" tabindex="-1"></a>        tpr_list.append(tpr)</span>
+<span id="cb22-16"><a href="#cb22-16" aria-hidden="true" tabindex="-1"></a>        fpr_list.append(fpr)</span>
+<span id="cb22-17"><a href="#cb22-17" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb22-18"><a href="#cb22-18" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> np.array(fpr_list), np.array(tpr_list), thresholds</span>
+<span id="cb22-19"><a href="#cb22-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-20"><a href="#cb22-20" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> auc_score(fpr, tpr):</span>
+<span id="cb22-21"><a href="#cb22-21" aria-hidden="true" tabindex="-1"></a>    sorted_indices <span class="op">=</span> np.argsort(fpr)</span>
+<span id="cb22-22"><a href="#cb22-22" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> np.trapz(tpr[sorted_indices], fpr[sorted_indices])</span>
+<span id="cb22-23"><a href="#cb22-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-24"><a href="#cb22-24" aria-hidden="true" tabindex="-1"></a><span class="co"># ROC муруй тооцоолох</span></span>
+<span id="cb22-25"><a href="#cb22-25" aria-hidden="true" tabindex="-1"></a>fpr, tpr, thresholds <span class="op">=</span> roc_curve(y_test, y_test_proba[:, <span class="dv">1</span>])</span>
+<span id="cb22-26"><a href="#cb22-26" aria-hidden="true" tabindex="-1"></a>auc <span class="op">=</span> auc_score(fpr, tpr)</span>
+<span id="cb22-27"><a href="#cb22-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-28"><a href="#cb22-28" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"AUC-ROC Score: </span><span class="sc">{</span>auc<span class="sc">:.4f}</span><span class="ss">"</span>)</span>
+<span id="cb22-29"><a href="#cb22-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-30"><a href="#cb22-30" aria-hidden="true" tabindex="-1"></a><span class="co"># Диаграмм</span></span>
+<span id="cb22-31"><a href="#cb22-31" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">6</span>, <span class="dv">5</span>))</span>
+<span id="cb22-32"><a href="#cb22-32" aria-hidden="true" tabindex="-1"></a>plt.plot(fpr, tpr, <span class="st">'b-'</span>, linewidth<span class="op">=</span><span class="dv">2</span>, label<span class="op">=</span><span class="ss">f'ROC curve (AUC = </span><span class="sc">{</span>auc<span class="sc">:.3f}</span><span class="ss">)'</span>)</span>
+<span id="cb22-33"><a href="#cb22-33" aria-hidden="true" tabindex="-1"></a>plt.plot([<span class="dv">0</span>, <span class="dv">1</span>], [<span class="dv">0</span>, <span class="dv">1</span>], <span class="st">'r--'</span>, linewidth<span class="op">=</span><span class="dv">1</span>, label<span class="op">=</span><span class="st">'Random (AUC = 0.5)'</span>)</span>
+<span id="cb22-34"><a href="#cb22-34" aria-hidden="true" tabindex="-1"></a>plt.fill_between(fpr, tpr, alpha<span class="op">=</span><span class="fl">0.3</span>)</span>
+<span id="cb22-35"><a href="#cb22-35" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'False Positive Rate'</span>)</span>
+<span id="cb22-36"><a href="#cb22-36" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'True Positive Rate'</span>)</span>
+<span id="cb22-37"><a href="#cb22-37" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'ROC Curve - Bernoulli Naive Bayes'</span>)</span>
+<span id="cb22-38"><a href="#cb22-38" aria-hidden="true" tabindex="-1"></a>plt.legend(loc<span class="op">=</span><span class="st">'lower right'</span>)</span>
+<span id="cb22-39"><a href="#cb22-39" aria-hidden="true" tabindex="-1"></a>plt.grid(<span class="va">True</span>, alpha<span class="op">=</span><span class="fl">0.3</span>)</span>
+<span id="cb22-40"><a href="#cb22-40" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
+<span id="cb22-41"><a href="#cb22-41" aria-hidden="true" tabindex="-1"></a>plt.show()</span>
+<span id="cb22-42"><a href="#cb22-42" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-43"><a href="#cb22-43" aria-hidden="true" tabindex="-1"></a>conclusion.append(<span class="ss">f"AUC-ROC үзүүлэлт </span><span class="sc">{</span>auc<span class="sc">:.4f}</span><span class="ss"> байна."</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>AUC-ROC Score: 0.7222</code></pre>
+</div>
+<div id="fig-roc-curve" class="cell-output cell-output-display quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-fig" id="fig-roc-curve-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Зураг&nbsp;3: ROC муруй ба AUC үзүүлэлт
+</figcaption>
+<div aria-describedby="fig-roc-curve-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<pre><code>&lt;Figure size 576x480 with 1 Axes&gt;</code></pre>
+</div>
+</figure>
+</div>
+</div>
+</section>
+<section id="кросс-валидаци" class="level2" data-number="5.4">
+<h2 data-number="5.4" class="anchored" data-anchor-id="кросс-валидаци"><span class="header-section-number">5.4</span> Кросс-валидаци</h2>
+<p>Загварын тогтвортой байдлыг шалгахын тулд 5-фолд кросс-валидаци хийнэ.</p>
+<div id="a18280ab" class="cell" data-execution_count="14">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> k_fold_cross_validation(X, y, k<span class="op">=</span><span class="dv">5</span>, alpha<span class="op">=</span><span class="fl">1.0</span>, random_state<span class="op">=</span><span class="dv">42</span>):</span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""K-фолд кросс-валидаци хийх"""</span></span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>    np.random.seed(random_state)</span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>    n_samples <span class="op">=</span> <span class="bu">len</span>(y)</span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>    indices <span class="op">=</span> np.random.permutation(n_samples)</span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a>    fold_size <span class="op">=</span> n_samples <span class="op">//</span> k</span>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a>    scores <span class="op">=</span> {<span class="st">'accuracy'</span>: [], <span class="st">'precision'</span>: [], <span class="st">'recall'</span>: [], <span class="st">'f1'</span>: []}</span>
+<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb25-10"><a href="#cb25-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> fold <span class="kw">in</span> <span class="bu">range</span>(k):</span>
+<span id="cb25-11"><a href="#cb25-11" aria-hidden="true" tabindex="-1"></a>        start_idx <span class="op">=</span> fold <span class="op">*</span> fold_size</span>
+<span id="cb25-12"><a href="#cb25-12" aria-hidden="true" tabindex="-1"></a>        end_idx <span class="op">=</span> start_idx <span class="op">+</span> fold_size <span class="cf">if</span> fold <span class="op">&lt;</span> k <span class="op">-</span> <span class="dv">1</span> <span class="cf">else</span> n_samples</span>
+<span id="cb25-13"><a href="#cb25-13" aria-hidden="true" tabindex="-1"></a>        test_idx <span class="op">=</span> indices[start_idx:end_idx]</span>
+<span id="cb25-14"><a href="#cb25-14" aria-hidden="true" tabindex="-1"></a>        train_idx <span class="op">=</span> np.concatenate([indices[:start_idx], indices[end_idx:]])</span>
+<span id="cb25-15"><a href="#cb25-15" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb25-16"><a href="#cb25-16" aria-hidden="true" tabindex="-1"></a>        X_train_fold, X_test_fold <span class="op">=</span> X[train_idx], X[test_idx]</span>
+<span id="cb25-17"><a href="#cb25-17" aria-hidden="true" tabindex="-1"></a>        y_train_fold, y_test_fold <span class="op">=</span> y[train_idx], y[test_idx]</span>
+<span id="cb25-18"><a href="#cb25-18" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb25-19"><a href="#cb25-19" aria-hidden="true" tabindex="-1"></a>        model_fold <span class="op">=</span> BernoulliNaiveBayes(alpha<span class="op">=</span>alpha)</span>
+<span id="cb25-20"><a href="#cb25-20" aria-hidden="true" tabindex="-1"></a>        model_fold.fit(X_train_fold, y_train_fold)</span>
+<span id="cb25-21"><a href="#cb25-21" aria-hidden="true" tabindex="-1"></a>        y_pred_fold <span class="op">=</span> model_fold.predict(X_test_fold)</span>
+<span id="cb25-22"><a href="#cb25-22" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb25-23"><a href="#cb25-23" aria-hidden="true" tabindex="-1"></a>        scores[<span class="st">'accuracy'</span>].append(accuracy_score(y_test_fold, y_pred_fold))</span>
+<span id="cb25-24"><a href="#cb25-24" aria-hidden="true" tabindex="-1"></a>        scores[<span class="st">'precision'</span>].append(precision_score(y_test_fold, y_pred_fold))</span>
+<span id="cb25-25"><a href="#cb25-25" aria-hidden="true" tabindex="-1"></a>        scores[<span class="st">'recall'</span>].append(recall_score(y_test_fold, y_pred_fold))</span>
+<span id="cb25-26"><a href="#cb25-26" aria-hidden="true" tabindex="-1"></a>        scores[<span class="st">'f1'</span>].append(f1_score(y_test_fold, y_pred_fold))</span>
+<span id="cb25-27"><a href="#cb25-27" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb25-28"><a href="#cb25-28" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> scores</span>
+<span id="cb25-29"><a href="#cb25-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-30"><a href="#cb25-30" aria-hidden="true" tabindex="-1"></a><span class="co"># 5-фолд кросс-валидаци</span></span>
+<span id="cb25-31"><a href="#cb25-31" aria-hidden="true" tabindex="-1"></a>cv_scores <span class="op">=</span> k_fold_cross_validation(X, y, k<span class="op">=</span><span class="dv">5</span>, alpha<span class="op">=</span><span class="fl">1.0</span>)</span>
+<span id="cb25-32"><a href="#cb25-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-33"><a href="#cb25-33" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"5-ФОЛД КРОСС-ВАЛИДАЦИЙН ҮР ДҮН"</span>)</span>
+<span id="cb25-34"><a href="#cb25-34" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"="</span> <span class="op">*</span> <span class="dv">50</span>)</span>
+<span id="cb25-35"><a href="#cb25-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-36"><a href="#cb25-36" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">Fold бүрийн үр дүн:"</span>)</span>
+<span id="cb25-37"><a href="#cb25-37" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">5</span>):</span>
+<span id="cb25-38"><a href="#cb25-38" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"Fold </span><span class="sc">{</span>i<span class="op">+</span><span class="dv">1</span><span class="sc">}</span><span class="ss">: Accuracy=</span><span class="sc">{</span>cv_scores[<span class="st">'accuracy'</span>][i]<span class="sc">:.4f}</span><span class="ss">, F1=</span><span class="sc">{</span>cv_scores[<span class="st">'f1'</span>][i]<span class="sc">:.4f}</span><span class="ss">"</span>)</span>
+<span id="cb25-39"><a href="#cb25-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-40"><a href="#cb25-40" aria-hidden="true" tabindex="-1"></a>cv_acc_mean <span class="op">=</span> np.mean(cv_scores[<span class="st">'accuracy'</span>])</span>
+<span id="cb25-41"><a href="#cb25-41" aria-hidden="true" tabindex="-1"></a>cv_acc_std <span class="op">=</span> np.std(cv_scores[<span class="st">'accuracy'</span>])</span>
+<span id="cb25-42"><a href="#cb25-42" aria-hidden="true" tabindex="-1"></a>cv_f1_mean <span class="op">=</span> np.mean(cv_scores[<span class="st">'f1'</span>])</span>
+<span id="cb25-43"><a href="#cb25-43" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-44"><a href="#cb25-44" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"</span><span class="ch">\n</span><span class="ss">Дундаж үр дүн:"</span>)</span>
+<span id="cb25-45"><a href="#cb25-45" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Accuracy: </span><span class="sc">{</span>cv_acc_mean<span class="sc">:.4f}</span><span class="ss"> ± </span><span class="sc">{</span>cv_acc_std<span class="sc">:.4f}</span><span class="ss">"</span>)</span>
+<span id="cb25-46"><a href="#cb25-46" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"F1 Score: </span><span class="sc">{</span>cv_f1_mean<span class="sc">:.4f}</span><span class="ss"> ± </span><span class="sc">{</span>np<span class="sc">.</span>std(cv_scores[<span class="st">'f1'</span>])<span class="sc">:.4f}</span><span class="ss">"</span>)</span>
+<span id="cb25-47"><a href="#cb25-47" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-48"><a href="#cb25-48" aria-hidden="true" tabindex="-1"></a>conclusion.append(<span class="ss">f"5-фолд кросс-валидацийн дундаж нарийвчлал </span><span class="sc">{</span>cv_acc_mean<span class="op">*</span><span class="dv">100</span><span class="sc">:.1f}</span><span class="ss">% (± </span><span class="sc">{</span>cv_acc_std<span class="op">*</span><span class="dv">100</span><span class="sc">:.1f}</span><span class="ss">%) байна."</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>5-ФОЛД КРОСС-ВАЛИДАЦИЙН ҮР ДҮН
+==================================================
+
+Fold бүрийн үр дүн:
+Fold 1: Accuracy=0.7524, F1=0.4383
+Fold 2: Accuracy=0.7443, F1=0.4291
+Fold 3: Accuracy=0.7397, F1=0.4565
+Fold 4: Accuracy=0.7336, F1=0.4279
+Fold 5: Accuracy=0.7417, F1=0.4573
+
+Дундаж үр дүн:
+Accuracy: 0.7423 ± 0.0061
+F1 Score: 0.4418 ± 0.0128</code></pre>
+</div>
+</div>
+</section>
+<section id="шинж-чанаруудын-ач-холбогдол" class="level2" data-number="5.5">
+<h2 data-number="5.5" class="anchored" data-anchor-id="шинж-чанаруудын-ач-холбогдол"><span class="header-section-number">5.5</span> Шинж чанаруудын ач холбогдол</h2>
+<div id="cell-fig-feature-importance" class="cell" data-execution_count="15">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>feature_importance <span class="op">=</span> model.get_feature_importance(feature_items)</span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Топ 10 нөлөөтэй бүтээгдэхүүн:"</span>)</span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"-"</span> <span class="op">*</span> <span class="dv">60</span>)</span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i, (_, row) <span class="kw">in</span> <span class="bu">enumerate</span>(feature_importance.head(<span class="dv">10</span>).iterrows(), <span class="dv">1</span>):</span>
+<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"</span><span class="sc">{</span>i<span class="sc">:2d}</span><span class="ss">. </span><span class="sc">{</span>row[<span class="st">'feature'</span>]<span class="sc">:&lt;25}</span><span class="ss"> | "</span></span>
+<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a>          <span class="ss">f"P(X=1|y=0)=</span><span class="sc">{</span>row[<span class="st">'prob_class_0'</span>]<span class="sc">:.4f}</span><span class="ss"> | "</span></span>
+<span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a>          <span class="ss">f"P(X=1|y=1)=</span><span class="sc">{</span>row[<span class="st">'prob_class_1'</span>]<span class="sc">:.4f}</span><span class="ss">"</span>)</span>
+<span id="cb27-9"><a href="#cb27-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-10"><a href="#cb27-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Визуализаци</span></span>
+<span id="cb27-11"><a href="#cb27-11" aria-hidden="true" tabindex="-1"></a>top_n <span class="op">=</span> <span class="dv">15</span></span>
+<span id="cb27-12"><a href="#cb27-12" aria-hidden="true" tabindex="-1"></a>top_features <span class="op">=</span> feature_importance.head(top_n)</span>
+<span id="cb27-13"><a href="#cb27-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-14"><a href="#cb27-14" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">6</span>))</span>
+<span id="cb27-15"><a href="#cb27-15" aria-hidden="true" tabindex="-1"></a>colors <span class="op">=</span> [<span class="st">'green'</span> <span class="cf">if</span> row[<span class="st">'prob_class_1'</span>] <span class="op">&gt;</span> row[<span class="st">'prob_class_0'</span>] <span class="cf">else</span> <span class="st">'red'</span> </span>
+<span id="cb27-16"><a href="#cb27-16" aria-hidden="true" tabindex="-1"></a>          <span class="cf">for</span> _, row <span class="kw">in</span> top_features.iterrows()]</span>
+<span id="cb27-17"><a href="#cb27-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-18"><a href="#cb27-18" aria-hidden="true" tabindex="-1"></a>bars <span class="op">=</span> plt.barh(<span class="bu">range</span>(top_n), top_features[<span class="st">'importance'</span>].values, color<span class="op">=</span>colors, alpha<span class="op">=</span><span class="fl">0.7</span>)</span>
+<span id="cb27-19"><a href="#cb27-19" aria-hidden="true" tabindex="-1"></a>plt.yticks(<span class="bu">range</span>(top_n), top_features[<span class="st">'feature'</span>].values)</span>
+<span id="cb27-20"><a href="#cb27-20" aria-hidden="true" tabindex="-1"></a>plt.gca().invert_yaxis()</span>
+<span id="cb27-21"><a href="#cb27-21" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'Ач холбогдол |log(P(X|y=1)/P(X|y=0))|'</span>)</span>
+<span id="cb27-22"><a href="#cb27-22" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="ss">f'Топ </span><span class="sc">{</span>top_n<span class="sc">}</span><span class="ss"> нөлөөтэй бүтээгдэхүүн'</span>)</span>
+<span id="cb27-23"><a href="#cb27-23" aria-hidden="true" tabindex="-1"></a>plt.grid(<span class="va">True</span>, alpha<span class="op">=</span><span class="fl">0.3</span>, axis<span class="op">=</span><span class="st">'x'</span>)</span>
+<span id="cb27-24"><a href="#cb27-24" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
+<span id="cb27-25"><a href="#cb27-25" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Топ 10 нөлөөтэй бүтээгдэхүүн:
+------------------------------------------------------------
+ 1. honey                     | P(X=1|y=0)=0.0005 | P(X=1|y=1)=0.0054
+ 2. kitchen utensil           | P(X=1|y=0)=0.0002 | P(X=1|y=1)=0.0015
+ 3. rubbing alcohol           | P(X=1|y=0)=0.0005 | P(X=1|y=1)=0.0029
+ 4. pudding powder            | P(X=1|y=0)=0.0009 | P(X=1|y=1)=0.0049
+ 5. rice                      | P(X=1|y=0)=0.0038 | P(X=1|y=1)=0.0191
+ 6. cereals                   | P(X=1|y=0)=0.0031 | P(X=1|y=1)=0.0147
+ 7. liquor                    | P(X=1|y=0)=0.0148 | P(X=1|y=1)=0.0034
+ 8. ready soups               | P(X=1|y=0)=0.0010 | P(X=1|y=1)=0.0044
+ 9. decalcifier               | P(X=1|y=0)=0.0010 | P(X=1|y=1)=0.0039
+10. jam                       | P(X=1|y=0)=0.0034 | P(X=1|y=1)=0.0122</code></pre>
+</div>
+<div id="fig-feature-importance" class="cell-output cell-output-display quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-fig" id="fig-feature-importance-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Зураг&nbsp;4: Шинж чанаруудын ач холбогдол (Топ 15)
+</figcaption>
+<div aria-describedby="fig-feature-importance-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<pre><code>&lt;Figure size 768x576 with 1 Axes&gt;</code></pre>
+</div>
+</figure>
+</div>
+</div>
+</section>
+</section>
+<section id="sklearn-тэй-харьцуулалт" class="level1" data-number="6">
+<h1 data-number="6"><span class="header-section-number">6</span> Sklearn-тэй харьцуулалт</h1>
+<p>Манай бүтээсэн загварыг sklearn номын сангийн BernoulliNB загвартай харьцуулна <span class="citation" data-cites="pedregosa2011scikit">Pedregosa et al. (<a href="#ref-pedregosa2011scikit" role="doc-biblioref">2011</a>)</span>.</p>
+<div id="ceffcea2" class="cell" data-execution_count="16">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.naive_bayes <span class="im">import</span> BernoulliNB</span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> accuracy_score <span class="im">as</span> sklearn_accuracy</span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Sklearn загвар сургах</span></span>
+<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a>sklearn_model <span class="op">=</span> BernoulliNB(alpha<span class="op">=</span><span class="fl">1.0</span>)</span>
+<span id="cb30-6"><a href="#cb30-6" aria-hidden="true" tabindex="-1"></a>sklearn_model.fit(X_train, y_train)</span>
+<span id="cb30-7"><a href="#cb30-7" aria-hidden="true" tabindex="-1"></a>sklearn_pred <span class="op">=</span> sklearn_model.predict(X_test)</span>
+<span id="cb30-8"><a href="#cb30-8" aria-hidden="true" tabindex="-1"></a>sklearn_proba <span class="op">=</span> sklearn_model.predict_proba(X_test)</span>
+<span id="cb30-9"><a href="#cb30-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-10"><a href="#cb30-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Манай загвар</span></span>
+<span id="cb30-11"><a href="#cb30-11" aria-hidden="true" tabindex="-1"></a>our_pred <span class="op">=</span> model.predict(X_test)</span>
+<span id="cb30-12"><a href="#cb30-12" aria-hidden="true" tabindex="-1"></a>our_proba <span class="op">=</span> model.predict_proba(X_test)</span>
+<span id="cb30-13"><a href="#cb30-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-14"><a href="#cb30-14" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"SKLEARN BERNOULLINB-ТЭЙ ХАРЬЦУУЛАЛТ"</span>)</span>
+<span id="cb30-15"><a href="#cb30-15" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"="</span> <span class="op">*</span> <span class="dv">50</span>)</span>
+<span id="cb30-16"><a href="#cb30-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-17"><a href="#cb30-17" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"</span><span class="ch">\n</span><span class="ss">1. Нарийвчлал (Accuracy):"</span>)</span>
+<span id="cb30-18"><a href="#cb30-18" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"   - Манай загвар:    </span><span class="sc">{</span>sklearn_accuracy(y_test, our_pred)<span class="sc">:.6f}</span><span class="ss">"</span>)</span>
+<span id="cb30-19"><a href="#cb30-19" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"   - Sklearn загвар:  </span><span class="sc">{</span>sklearn_accuracy(y_test, sklearn_pred)<span class="sc">:.6f}</span><span class="ss">"</span>)</span>
+<span id="cb30-20"><a href="#cb30-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-21"><a href="#cb30-21" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"</span><span class="ch">\n</span><span class="ss">2. Таамаглалын тохирол:"</span>)</span>
+<span id="cb30-22"><a href="#cb30-22" aria-hidden="true" tabindex="-1"></a>matching <span class="op">=</span> np.<span class="bu">sum</span>(our_pred <span class="op">==</span> sklearn_pred)</span>
+<span id="cb30-23"><a href="#cb30-23" aria-hidden="true" tabindex="-1"></a>total <span class="op">=</span> <span class="bu">len</span>(y_test)</span>
+<span id="cb30-24"><a href="#cb30-24" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"   - Ижил таамаглал:  </span><span class="sc">{</span>matching<span class="sc">:,}</span><span class="ss"> / </span><span class="sc">{</span>total<span class="sc">:,}</span><span class="ss"> (</span><span class="sc">{</span>matching<span class="op">/</span>total<span class="op">*</span><span class="dv">100</span><span class="sc">:.2f}</span><span class="ss">%)"</span>)</span>
+<span id="cb30-25"><a href="#cb30-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-26"><a href="#cb30-26" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"</span><span class="ch">\n</span><span class="ss">3. Магадлалын ялгаа:"</span>)</span>
+<span id="cb30-27"><a href="#cb30-27" aria-hidden="true" tabindex="-1"></a>prob_diff <span class="op">=</span> np.<span class="bu">abs</span>(our_proba <span class="op">-</span> sklearn_proba)</span>
+<span id="cb30-28"><a href="#cb30-28" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"   - Дундаж ялгаа:    </span><span class="sc">{</span>np<span class="sc">.</span>mean(prob_diff)<span class="sc">:.8f}</span><span class="ss">"</span>)</span>
+<span id="cb30-29"><a href="#cb30-29" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"   - Хамгийн их ялгаа: </span><span class="sc">{</span>np<span class="sc">.</span><span class="bu">max</span>(prob_diff)<span class="sc">:.8f}</span><span class="ss">"</span>)</span>
+<span id="cb30-30"><a href="#cb30-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-31"><a href="#cb30-31" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> matching<span class="op">/</span>total <span class="op">&gt;</span> <span class="fl">0.99</span>:</span>
+<span id="cb30-32"><a href="#cb30-32" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">✓ Манай загвар sklearn-тэй бараг 100% ижил таамаглал өгч байна!"</span>)</span>
+<span id="cb30-33"><a href="#cb30-33" aria-hidden="true" tabindex="-1"></a>    conclusion.append(<span class="st">"Манай бүтээсэн загвар sklearn-ийн BernoulliNB-тэй бараг 100% ижил үр дүн өгч байна."</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>SKLEARN BERNOULLINB-ТЭЙ ХАРЬЦУУЛАЛТ
+==================================================
+
+1. Нарийвчлал (Accuracy):
+   - Манай загвар:    0.752415
+   - Sklearn загвар:  0.752415
+
+2. Таамаглалын тохирол:
+   - Ижил таамаглал:  1,967 / 1,967 (100.00%)
+
+3. Магадлалын ялгаа:
+   - Дундаж ялгаа:    0.00000000
+   - Хамгийн их ялгаа: 0.00000000
+
+✓ Манай загвар sklearn-тэй бараг 100% ижил таамаглал өгч байна!</code></pre>
+</div>
+</div>
+</section>
+<section id="дүгнэлт" class="level1 unnumbered">
+<h1 class="unnumbered">Дүгнэлт</h1>
+<div id="929d9d62" class="cell" data-execution_count="17">
+<div class="cell-output cell-output-display cell-output-markdown">
+
+</div>
+</div>
+<p>Энэхүү судалгааны ажил нь Бернуллийн Наив Байесын алгоритмыг математик үндэслэл, онолын суурь зарчмуудын дагуу Python хэл дээр эхнээс нь хэрэгжүүлж, Groceries өгөгдлийн сантай уялдуулан турших замаар загварын оновчтой ажиллагаа, үнэн зөв таамаглал хийх чадварыг бодит өгөгдөл дээр нотлон харууллаа.</p>
+<p><strong>Хязгаарлалт ба цаашдын судалгаа:</strong></p>
+<ul>
+<li>Наив Байесын нөхцөлт үл хамаарлын таамаглал нь бодит байдалд үргэлж биелдэггүй</li>
+<li>Бусад машин сургалтын алгоритмуудтай (Random Forest, SVM) харьцуулалт хийх</li>
+<li>Илүү олон зорилтот бүтээгдэхүүнийг таамаглах олон ангиллын загвар бүтээх</li>
+</ul>
+</section>
+<section id="багийн-гишүүдийн-үүрэг-оролцоо" class="level1 unnumbered">
+<h1 class="unnumbered">Багийн гишүүдийн үүрэг оролцоо</h1>
+<div id="7dc5ca6e" class="cell" data-execution_count="18">
+<div class="cell-output cell-output-display" data-execution_count="18">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">Гишүүн</th>
+<th data-quarto-table-cell-role="th">Оюутны код</th>
+<th data-quarto-table-cell-role="th">Үүрэг ба оролцоо</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">0</th>
+<td>Б.Билгүүнтөгөлдөр</td>
+<td>20B1NUM1087</td>
+<td>Онолын үндэслэл, математик томьёолол (20%)</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">1</th>
+<td>О.Энхбаяр</td>
+<td>21B1NUM0940</td>
+<td>Өгөгдлийн цуглуулалт, боловсруулалт (20%)</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">2</th>
+<td>Э.Алтаншагай</td>
+<td>22B1NUM0331</td>
+<td>Загварыг эхнээс бүтээх, кодлох (25%)</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">3</th>
+<td>Б.Намуундарь</td>
+<td>23B1NUM0543</td>
+<td>Загварын үнэлгээ, визуализаци (20%)</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">4</th>
+<td>Ч.Саранцацралт</td>
+<td>24B1NUM0019</td>
+<td>Тайлан бичих, дүгнэлт гаргах (15%)</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+</section>
+<section id="ашигласан-материал" class="level1 unnumbered">
+<h1 class="unnumbered">Ашигласан материал</h1>
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" data-line-spacing="2" role="list">
+<div id="ref-hahsler2006arules" class="csl-entry" role="listitem">
+Hahsler, M., Grün, B., &amp; Hornik, K. (2006). Arules—a computational environment for mining association rules and frequent item sets. <em>Journal of Statistical Software</em>, <em>14</em>(15), 1–25. <a href="https://doi.org/10.18637/jss.v014.i15">https://doi.org/10.18637/jss.v014.i15</a>
+</div>
+<div id="ref-james2021introduction" class="csl-entry" role="listitem">
+James, G., Witten, D., Hastie, T., &amp; Tibshirani, R. (2021). <em>An introduction to statistical learning: With applications in <span>R</span></em> (2nd ed.). Springer. <a href="https://doi.org/10.1007/978-1-0716-1418-1">https://doi.org/10.1007/978-1-0716-1418-1</a>
+</div>
+<div id="ref-leskovec2014mining" class="csl-entry" role="listitem">
+Leskovec, J., Rajaraman, A., &amp; Ullman, J. D. (2014). <em>Mining of massive datasets</em> (2nd ed.). Cambridge University Press.
+</div>
+<div id="ref-murphy2012machine" class="csl-entry" role="listitem">
+Murphy, K. P. (2012). <em>Machine learning: A probabilistic perspective</em>. MIT Press.
+</div>
+<div id="ref-pedregosa2011scikit" class="csl-entry" role="listitem">
+Pedregosa, F., Varoquaux, G., Gramfort, A., Michel, V., Thirion, B., Grisel, O., Blondel, M., Prettenhofer, P., Weiss, R., Dubourg, V., et al. (2011). Scikit-learn: Machine learning in <span>Python</span>. <em>Journal of Machine Learning Research</em>, <em>12</em>, 2825–2830.
+</div>
+</div>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
